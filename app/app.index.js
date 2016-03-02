@@ -1,4 +1,4 @@
-System.register(['angular2/core', "angular2/router", './store/product.list', './store/category.list'], function(exports_1) {
+System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', "angular2/router", './store/product.list', './
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, product_list_1, category_list_1;
+    var core_1, router_1, data_service_1, product_list_1;
     var Store;
     return {
         setters:[
@@ -18,16 +18,28 @@ System.register(['angular2/core', "angular2/router", './store/product.list', './
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (data_service_1_1) {
+                data_service_1 = data_service_1_1;
+            },
             function (product_list_1_1) {
                 product_list_1 = product_list_1_1;
-            },
-            function (category_list_1_1) {
-                category_list_1 = category_list_1_1;
             }],
         execute: function() {
             Store = (function () {
-                function Store() {
+                function Store(_dataService) {
+                    this._dataService = _dataService;
+                    this.addClass = false;
                 }
+                Store.prototype.getCategories = function () {
+                    var _this = this;
+                    this._dataService.getAllCategories().distinctUntilChanged().subscribe(function (dat) { _this.categories = dat; });
+                };
+                Store.prototype.showNav = function () {
+                    this.getCategories();
+                };
+                Store.prototype.toggleClass = function () {
+                    this.addClass = !this.addClass;
+                };
                 Store = __decorate([
                     core_1.Component({
                         selector: 'store-app'
@@ -40,16 +52,10 @@ System.register(['angular2/core', "angular2/router", './store/product.list', './
                         {
                             path: '/store',
                             name: 'Products',
-                            component: product_list_1.ProductList,
-                            useAsDefault: true
-                        },
-                        {
-                            path: '/categories',
-                            name: 'Categories',
-                            component: category_list_1.CategoryList
+                            component: product_list_1.ProductList
                         }
                     ]), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [data_service_1.DataService])
                 ], Store);
                 return Store;
             })();

@@ -33,7 +33,7 @@ figure{margin: 0; padding: 0;}
 @lightgreen:#c3ddb9;
 @grey:#777777;
 @mediumgrey:#dddddd;
-@lightgrey:#e5e9e5;
+@lightgrey:#f1f1f1;
 @darkgrey:#58585a;
 
 // TYPOGRAPHY
@@ -115,16 +115,43 @@ img{max-width: 100%; vertical-align: middle; border: 0;
 
 .wrapper{width: 100%; margin: auto;max-width: 1200px;padding:0 10px;.pos-relative}
 
-body{.normal;.fsize(14px); background: @lightgrey;}
+body{.normal;.fsize(14px);background: @lightgrey}
 
-#header{background: @darkgrey;
-  .mainNav{
-    ul{
-      li{.in-block;
-        a{.in-block; padding: 20px;color: @white;.uppercase;
-          &:hover,&.router-link-active{background: @black; }
+#header{padding: 10px 0;border-bottom: 1px solid @mediumgrey;background: @white;
+  .mainNav{.floatleft;padding: 5px 0; margin-right: 20px;.pos-relative;
+    .strips{cursor: pointer;width: 30px;height: 30px;-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-o-transform: rotate(0deg);transform: rotate(0deg);.transition(@time: .5s,@ease: ease-in-out);z-index: 101;
+      div{display: block; position: absolute; width:100%;height: 4px; background: @black; opacity: 1; left: 0;-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-o-transform: rotate(0deg);transform: rotate(0deg);.transition(@time: .5s,@ease: ease-in-out);
+        &:nth-child(1){top:0;}
+        &:nth-child(2),&:nth-child(3){top: 8px;}
+        &:nth-child(4){top:16px;}
+      }
+    }//strips
+    ul{width: 300px;.pos-absolute;max-height:0; overflow: hidden;.transition();top:50px;background: url(../images/loading.gif) @white center no-repeat;
+      li{
+        a{.dis-block;padding: 10px;background: @white;color: @black;
+          &:hover{background: @green; color: @white;}
         }
       }
+
     }
+    &.open{
+      .strips{
+        div{
+          &:nth-child(1),&:nth-child(4){top:8px;width: 0; left: 50%;}
+          &:nth-child(2){-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-o-transform: rotate(45deg);transform: rotate(45deg);}
+          &:nth-child(3){ -webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-o-transform: rotate(-45deg);transform: rotate(-45deg);}
+        }
+      }
+      ul{max-height: 500%;min-height: 100px;}
+    }
+  }//main-nav
+  .logo{.floatleft;
+    a{color: @black;.fsize(30px);.bold;.uppercase;}
+  }
+
+
+  .search{.floatright;
+
   }
 }//header
+

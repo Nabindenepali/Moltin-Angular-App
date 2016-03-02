@@ -1,11 +1,15 @@
 import {Injectable} from 'angular2/core';
+import {Observable} from 'rxjs/Rx';
+import {CategoryInterface} from 'data.interface';
+
 
 @Injectable()
 export class DataService{
+    observable : Observable;
     publicId : string;
-    moltin;
+        moltin;
     constructor(){
-        this.publicId = 'gF543ALI2PxZnQYjsTufT5RA6u7fnNemnnTX0gPh';
+        this.publicId = 'yxUnERm1C9z3h4eerRvGNwtdRC2cYcPMkW46fzwZ';
         this.moltin = new Moltin({publicId: this.publicId});
         this.moltin.Authenticate();
     }
@@ -13,8 +17,18 @@ export class DataService{
     getAllProducts(){
         return this.moltin.Product.List();
     }
-    getAllCategories(){
-        return this.moltin.Category.List();
+    getAllCategories() {
+        //var promise = new Promise(resolve => {
+        //    this.moltin.Category.List(null, function (res) {
+        //        resolve(res);
+        //    })
+        //});
+
+        return Observable.create((observer) => {
+                this.moltin.Category.List(null, function (res) {
+                    observer.next(res);
+                })
+        });
     }
 }
 

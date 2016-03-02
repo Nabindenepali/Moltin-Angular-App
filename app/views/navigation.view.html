@@ -1,15 +1,32 @@
 <header id="header">
-    <nav class="mainNav">
-        <div class="wrapper">
-            <ul>
-                <li><a class="navbar-brand" [routerLink]="['Products']">Store</a></li>
-                <li> <a class="navbar-brand" [routerLink]="['Categories']">Categories</a></li>
-
+    <div class="wrapper clearfix">
+        <nav class="mainNav"  [class.open]="addClass" (click)="showNav()">
+            <div class="strips">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="loading">
+                <li *ngFor="#category of categories">
+                    <a href="">{{category.title}}</a>
+                </li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+        <section class="search">
+            <form action="">
+                <input type="text" placeholder="Search Products">
+                <input type="submit" value="search">
+            </form>
+        </section>
+    <!--<nav class="mainNav">-->
+            <!--<ul>-->
+                <!--<li><a class="navbar-brand" [routerLink]="['Products']">Store</a></li>-->
+                <!--<li> <a class="navbar-brand" [routerLink]="['Categories']">Categories</a></li>-->
 
-
+            <!--</ul>-->
+    <!--</nav>-->
+    </div>
 </header>
 
 <router-outlet></router-outlet>
