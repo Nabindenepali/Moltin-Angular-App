@@ -14,10 +14,18 @@
             </ul>
         </nav>
         <section class="search">
-            <form action="">
-                <input type="text" placeholder="Search Products">
-                <input type="submit" value="search">
-            </form>
+
+                <input type="text" placeholder="Search Products" [ngFormControl]="term"/>
+
+            <div class="searchResults">
+                <ul>
+                    <li *ngFor="#item of searchitems">
+                        <a href="">
+                            {{item.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </section>
     <!--<nav class="mainNav">-->
             <!--<ul>-->

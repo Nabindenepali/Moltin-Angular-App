@@ -1,4 +1,4 @@
-System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list'], function(exports_1) {
+System.register(['angular2/core', "angular2/router", 'angular2/common', './dataService/data.service', './store/product.list'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, data_service_1, product_list_1;
+    var core_1, router_1, common_1, data_service_1, product_list_1;
     var Store;
     return {
         setters:[
@@ -17,6 +17,9 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             },
             function (data_service_1_1) {
                 data_service_1 = data_service_1_1;
@@ -27,14 +30,23 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
         execute: function() {
             Store = (function () {
                 function Store(_dataService) {
+                    var _this = this;
                     this._dataService = _dataService;
                     this.addClass = false;
+                    this.term = new common_1.Control();
+                    this.term.valueChanges
+                        .debounceTime(400)
+                        .subscribe(function (term) { return _this._dataService.searchProducts(term)
+                        .subscribe(function (items) { return _this.searchitems = items; }); });
                 }
                 Store.prototype.getCategories = function () {
                     var _this = this;
-                    this._dataService.getAllCategories().distinctUntilChanged().subscribe(function (dat) { _this.categories = dat; });
+                    this._dataService.getAllCategories()
+                        .distinctUntilChanged()
+                        .subscribe(function (dat) { return _this.categories = dat; });
                 };
                 Store.prototype.showNav = function () {
+                    this.toggleClass();
                     this.getCategories();
                 };
                 Store.prototype.toggleClass = function () {

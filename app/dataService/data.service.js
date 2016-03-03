@@ -31,15 +31,19 @@ System.register(['angular2/core', 'rxjs/Rx'], function(exports_1, context_1) {
                     return this.moltin.Product.List();
                 };
                 DataService.prototype.getAllCategories = function () {
-                    //var promise = new Promise(resolve => {
-                    //    this.moltin.Category.List(null, function (res) {
-                    //        resolve(res);
-                    //    })
-                    //});
                     var _this = this;
                     return Rx_1.Observable.create(function (observer) {
                         _this.moltin.Category.List(null, function (res) {
+                            console.log(res);
                             observer.next(res);
+                        });
+                    });
+                };
+                DataService.prototype.searchProducts = function (searchTerms) {
+                    var _this = this;
+                    return Rx_1.Observable.create(function (observer) {
+                        _this.moltin.Product.Search({ title: searchTerms }, function (products) {
+                            observer.next(products);
                         });
                     });
                 };
