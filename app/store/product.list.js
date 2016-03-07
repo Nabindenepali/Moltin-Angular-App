@@ -33,8 +33,19 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                     this.getProducts();
                 };
                 ProductList.prototype.getProducts = function () {
-                    this.products = this._dataSevice.getAllProducts();
-                    console.log(this._dataSevice.getAllProducts());
+                    var _this = this;
+                    //this._dataSevice.getAllProducts()
+                    //    .subscribe(
+                    //    res => {
+                    //        if(res.status === 200 ){
+                    //            this.products = res.json().result;
+                    //        } else {
+                    //            console.log("An error occurred calling moltin: " + res.status);
+                    //        }
+                    //    }
+                    //)
+                    this._dataSevice.getAllProducts().subscribe(function (products) { return _this.products = products; });
+                    console.log();
                 };
                 ProductList = __decorate([
                     core_1.Component({

@@ -25,7 +25,19 @@ export class ProductList implements OnInit{
         this.getProducts();
     }
     getProducts(){
-        this.products = this._dataSevice.getAllProducts();
-        console.log(this._dataSevice.getAllProducts());
+        //this._dataSevice.getAllProducts()
+        //    .subscribe(
+        //    res => {
+        //        if(res.status === 200 ){
+        //            this.products = res.json().result;
+        //        } else {
+        //            console.log("An error occurred calling moltin: " + res.status);
+        //        }
+        //    }
+        //)
+        this._dataSevice.getAllProducts().subscribe(
+            products => this.products = products
+        )
+        console.log();
     }
 }

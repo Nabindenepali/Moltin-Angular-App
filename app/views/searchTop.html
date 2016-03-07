@@ -1,0 +1,12 @@
+<input type="text" [ngFormControl]="term"/>
+<div class="searchResults">
+    <ul>
+        <li *ngFor="#item of items | async">
+            <a href="">{{item.title}}</a>
+        </li>
+    </ul>
+</div>
+
+
+
+

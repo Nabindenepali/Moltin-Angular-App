@@ -7,6 +7,7 @@ import {DataService} from './dataService/data.service';
 import {CategoryInterface} from './dataService/data.interface';
 import {ProductList} from './store/product.list';
 import {CategoryList} from './store/category.list';
+import {Search} from './store/search.component';
 
 @Component({
     selector : 'store-app'
@@ -14,14 +15,15 @@ import {CategoryList} from './store/category.list';
 
 @View({
         templateUrl : '/app/views/navigation.view.html',
-        directives : [ROUTER_DIRECTIVES]
+        directives : [ROUTER_DIRECTIVES,Search]
 })
 
 @RouteConfig([
     {
         path: '/store',
         name : 'Products',
-        component : ProductList
+        component : ProductList,
+        useAsDefault : true
     }
 ])
 
@@ -30,28 +32,18 @@ export class Store implements OnInit{
     categories : CategoryInterface[];
     constructor(
         private _dataService : DataService
-    ){
-        this.getCategories();
-
-    }
+    ){}
 
     getCategories(){
         this._dataService.getCategories()
             .subscribe(
-              res => {
-                  if (res.status === 200) {
-                      this.categories = res.json().result
-                  } else {
-                      console.log("An error occurred calling moltin: " + res.status);
-                  }
-              }
+              categories => this.categories = categories
         )
         //this._dataService.getData();
     }
 
     showNav(){
         this.toggleClass();
-        this.getCategories();
     }
 
     toggleClass(){

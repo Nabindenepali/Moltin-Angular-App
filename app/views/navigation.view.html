@@ -7,34 +7,22 @@
                 <div></div>
                 <div></div>
             </div>
-            <ul class="loading">
-                <li *ngFor="#category of categories">
-                    <a href="">{{category.title}}</a>
-                </li>
+            <!--<ul class="loading">-->
+                <!--<li *ngFor="#category of categories">-->
+                    <!--<a href="">{{category.title}}</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <ul>
+                <li><a class="navbar-brand" [routerLink]="['Products']">Store</a></li>
+
+
             </ul>
         </nav>
-        <!--<section class="search">-->
-
-                <!--<input type="text"  [ngFormControl]="term"/>-->
-
-            <!--<div class="searchResults" [hidden]="term.valid">-->
-                <!--<ul>-->
-                    <!--&lt;!&ndash;<li *ngFor="#item of searchitems">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a href="">&ndash;&gt;-->
-                            <!--&lt;!&ndash;{{item.title}}&ndash;&gt;-->
-                        <!--&lt;!&ndash;</a>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                    <!--<li>a</li>-->
-                    <!--<li>b</li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</section>-->
+        <section class="search">
+            <search #search></search>
+        </section>
     <!--<nav class="mainNav">-->
-            <!--<ul>-->
-                <!--<li><a class="navbar-brand" [routerLink]="['Products']">Store</a></li>-->
-                <!--<li> <a class="navbar-brand" [routerLink]="['Categories']">Categories</a></li>-->
-
-            <!--</ul>-->
+            <!---->
     <!--</nav>-->
     </div>
 </header>

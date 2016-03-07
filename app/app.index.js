@@ -1,4 +1,4 @@
-System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list'], function(exports_1, context_1) {
+System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list', './store/search.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, data_service_1, product_list_1;
+    var core_1, router_1, data_service_1, product_list_1, search_component_1;
     var Store;
     return {
         setters:[
@@ -25,29 +25,23 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
             },
             function (product_list_1_1) {
                 product_list_1 = product_list_1_1;
+            },
+            function (search_component_1_1) {
+                search_component_1 = search_component_1_1;
             }],
         execute: function() {
             Store = (function () {
                 function Store(_dataService) {
                     this._dataService = _dataService;
-                    this.getCategories();
                 }
                 Store.prototype.getCategories = function () {
                     var _this = this;
                     this._dataService.getCategories()
-                        .subscribe(function (res) {
-                        if (res.status === 200) {
-                            _this.categories = res.json().result;
-                        }
-                        else {
-                            console.log("An error occurred calling moltin: " + res.status);
-                        }
-                    });
+                        .subscribe(function (categories) { return _this.categories = categories; });
                     //this._dataService.getData();
                 };
                 Store.prototype.showNav = function () {
                     this.toggleClass();
-                    this.getCategories();
                 };
                 Store.prototype.toggleClass = function () {
                     this.addClass = !this.addClass;
@@ -58,13 +52,14 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                     }),
                     core_1.View({
                         templateUrl: '/app/views/navigation.view.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, search_component_1.Search]
                     }),
                     router_1.RouteConfig([
                         {
                             path: '/store',
                             name: 'Products',
-                            component: product_list_1.ProductList
+                            component: product_list_1.ProductList,
+                            useAsDefault: true
                         }
                     ]), 
                     __metadata('design:paramtypes', [data_service_1.DataService])

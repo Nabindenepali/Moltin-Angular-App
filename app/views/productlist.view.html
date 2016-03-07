@@ -1,12 +1,14 @@
-<div class="container">
-<div class="row">
-<article  *ngFor="#product of products" class="col-md-3">
-    <figure>
-        <img src="{{product.images[0].url.https}}" alt="{{product.images.name}}">
-    </figure>
-    <h2>{{product.title}}</h2>
+<section class="productsList">
+    <div class="wrapper clearfix">
+        <article  *ngFor="#product of products">
+            <figure>
+                <img src="{{product.images[0].url.https}}" alt="{{product.images.name}}">
+            </figure>
+            <h2>{{product.title}}</h2>
 
-</article>
-</div>
-</div>
+        </article>
+    </div>
+</section>
+
+
 
