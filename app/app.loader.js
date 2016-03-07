@@ -1,7 +1,7 @@
-System.register(['angular2/platform/browser', "angular2/router", './app.index', './dataService/data.service'], function(exports_1, context_1) {
+System.register(['angular2/platform/browser', "angular2/router", 'angular2/http', './app.index', './dataService/data.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var browser_1, router_1, app_index_1, data_service_1;
+    var browser_1, router_1, http_1, app_index_1, data_service_1;
     return {
         setters:[
             function (browser_1_1) {
@@ -10,6 +10,9 @@ System.register(['angular2/platform/browser', "angular2/router", './app.index', 
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
             function (app_index_1_1) {
                 app_index_1 = app_index_1_1;
             },
@@ -17,7 +20,7 @@ System.register(['angular2/platform/browser', "angular2/router", './app.index', 
                 data_service_1 = data_service_1_1;
             }],
         execute: function() {
-            browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService]);
+            browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS]);
         }
     }
 });

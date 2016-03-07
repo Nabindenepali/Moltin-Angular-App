@@ -52,10 +52,10 @@ h1,h2,h3,h4,h5,h6{.bold;line-height: 100%;}
 .no-transition {-moz-transition: none;-webkit-transition: none;-o-transition: none;transition: none;}
 .border (@bdclr: @grey, @bdwidth: 1px, @bdtype: solid) {border:@bdclr @bdwidth @bdtype;}
 .placeholderColor(@color:@maincolor){
-  &::-webkit-input-placeholder {color:@color;}
-  &:-moz-placeholder {color:@color;}
-  &::-moz-placeholder {color:@color;}
-  &:-ms-input-placeholder {color:@color;}
+  &::-webkit-input-placeholder {color:@color;.transition()}
+  &:-moz-placeholder {color:@color;.transition()}
+  &::-moz-placeholder {color:@color;.transition()}
+  &:-ms-input-placeholder {color:@color;.transition()}
 }
 .break-word{-ms-word-break: break-all;word-break: break-all;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;}
 .boxsizing{-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box; }
@@ -164,7 +164,10 @@ body{.normal;.fsize(14px);background:@lightgrey}
 
 
   .search{.floatright;width: 30%;border: 1px solid @lightgrey;.pos-relative;
-      input[type="text"]{.floatleft;width:~'calc(100% - 50px)'; height: 40px;line-height: 40px;border: 0;}
+      input[type="text"]{.floatleft; height: 40px;line-height: 40px;border: 0;
+        &.ng-pristine{background: none; }
+        &.ng-dirty{background: url(../images/loading.gif) right center no-repeat; }
+      }
     input[type="submit"]{background: url("../images/icon-search.png") center no-repeat;height: 30px; width: 30px;background-size: cover; text-indent: -99999px;.floatright;margin: 5px 10px;}
     .searchResults{.pos-absolute;left:0;top:100%;width: 100%;background: @mediumgrey;
       ul{

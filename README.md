@@ -6,7 +6,7 @@ App using Angular2 for Frontend and Moltin as the Backend and API provider.
 
 1. Register at https://moltin.com/
 2. Get the public key from the site
-3. Replace the key in <strong>this.publicid</strong> inside data.service.ts file inside app/dataService folder
+3. Update the <strong>PUBLIC_ID</strong> in app/dataService/service.details.ts with your public ID.
 2. Create a store at https://forge.moltin.com/ after registration
 
 

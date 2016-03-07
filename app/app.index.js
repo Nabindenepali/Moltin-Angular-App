@@ -1,4 +1,6 @@
-System.register(['angular2/core', "angular2/router", 'angular2/common', './dataService/data.service', './store/product.list'], function(exports_1) {
+System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +10,7 @@ System.register(['angular2/core', "angular2/router", 'angular2/common', './dataS
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, common_1, data_service_1, product_list_1;
+    var core_1, router_1, data_service_1, product_list_1;
     var Store;
     return {
         setters:[
@@ -17,9 +19,6 @@ System.register(['angular2/core', "angular2/router", 'angular2/common', './dataS
             },
             function (router_1_1) {
                 router_1 = router_1_1;
-            },
-            function (common_1_1) {
-                common_1 = common_1_1;
             },
             function (data_service_1_1) {
                 data_service_1 = data_service_1_1;
@@ -30,20 +29,21 @@ System.register(['angular2/core', "angular2/router", 'angular2/common', './dataS
         execute: function() {
             Store = (function () {
                 function Store(_dataService) {
-                    var _this = this;
                     this._dataService = _dataService;
-                    this.addClass = false;
-                    this.term = new common_1.Control();
-                    this.term.valueChanges
-                        .debounceTime(400)
-                        .subscribe(function (term) { return _this._dataService.searchProducts(term)
-                        .subscribe(function (items) { return _this.searchitems = items; }); });
+                    this.getCategories();
                 }
                 Store.prototype.getCategories = function () {
                     var _this = this;
-                    this._dataService.getAllCategories()
-                        .distinctUntilChanged()
-                        .subscribe(function (dat) { return _this.categories = dat; });
+                    this._dataService.getCategories()
+                        .subscribe(function (res) {
+                        if (res.status === 200) {
+                            _this.categories = res.json().result;
+                        }
+                        else {
+                            console.log("An error occurred calling moltin: " + res.status);
+                        }
+                    });
+                    //this._dataService.getData();
                 };
                 Store.prototype.showNav = function () {
                     this.toggleClass();
@@ -70,7 +70,7 @@ System.register(['angular2/core', "angular2/router", 'angular2/common', './dataS
                     __metadata('design:paramtypes', [data_service_1.DataService])
                 ], Store);
                 return Store;
-            })();
+            }());
             exports_1("Store", Store);
         }
     }
