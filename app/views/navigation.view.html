@@ -1,17 +1,12 @@
 <header id="header">
     <div class="wrapper clearfix">
-        <nav class="mainNav"  [class.open]="addClass" (click)="showNav()">
+        <nav class="mainNav" dropdown-menu>
             <div class="strips">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
-            <!--<ul class="loading">-->
-                <!--<li *ngFor="#category of categories">-->
-                    <!--<a href="">{{category.title}}</a>-->
-                <!--</li>-->
-            <!--</ul>-->
             <ul>
                 <li><a class="navbar-brand" [routerLink]="['Products']">Store</a></li>
 
@@ -21,9 +16,7 @@
         <section class="search">
             <search #search></search>
         </section>
-    <!--<nav class="mainNav">-->
-            <!---->
-    <!--</nav>-->
+
     </div>
 </header>
 

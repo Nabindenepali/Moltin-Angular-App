@@ -1,4 +1,4 @@
-System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list', './store/search.component'], function(exports_1, context_1) {
+System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list', './store/productDetail.component', './store/search.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, data_service_1, product_list_1, search_component_1;
+    var core_1, router_1, data_service_1, product_list_1, productDetail_component_1, search_component_1;
     var Store;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
             },
             function (product_list_1_1) {
                 product_list_1 = product_list_1_1;
+            },
+            function (productDetail_component_1_1) {
+                productDetail_component_1 = productDetail_component_1_1;
             },
             function (search_component_1_1) {
                 search_component_1 = search_component_1_1;
@@ -61,6 +64,11 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                             path: '/store',
                             name: 'Products',
                             component: product_list_1.ProductList
+                        },
+                        {
+                            path: '/store/:productslug',
+                            name: 'ProductsDetail',
+                            component: productDetail_component_1.ProductDetail
                         }
                     ]), 
                     __metadata('design:paramtypes', [data_service_1.DataService])

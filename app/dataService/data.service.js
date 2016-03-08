@@ -42,6 +42,7 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', './service.details
                 DataService.prototype.getData = function (dataurl) {
                     //stores sessionStorage in a temp varirable
                     var session = JSON.parse(sessionStorage.getItem('access-token'));
+                    console.log(session.expires, this.currentDate);
                     //
                     //Checks if Token has expired
                     if (this.currentDate >= session.expires) {
@@ -63,6 +64,15 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', './service.details
                 };
                 DataService.prototype.getAllProducts = function () {
                     return this.getData('https://api.molt.in/v1/products');
+                };
+                DataService.prototype.getProductDetail = function (slug) {
+                    //this.authorize();
+                    return this.getData('https://api.molt.in/v1/products/search?slug=' + slug);
+                    //this.moltin.Product.Get(slug, function(product) {
+                    //    console.log(product);
+                    //}, function(error) {
+                    //    // Something went wrong...
+                    //})
                 };
                 DataService.prototype.search = function (terms) {
                     return this.getData('https://api.molt.in/v1/products/search?title=' + terms);

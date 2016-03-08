@@ -129,7 +129,7 @@ input[type='submit'],input[type='button']{width: 100%; border: 0; background: @m
 .wrapper{width: 100%; margin: auto;max-width: 1200px;padding:0 10px;.pos-relative}
 
 body{.normal;.fsize(14px);background:@lightgrey}
-
+.loading{background: url(../images/loading.gif) right center no-repeat;height: 100px; width: 100px; margin: auto;}
 #header{padding: 10px 0;border-bottom: 1px solid @mediumgrey;background: @white;.pos-relative;z-index: 10;
   .mainNav{.floatleft;padding: 5px 0; margin-right: 20px;.pos-relative;
     .strips{cursor: pointer;width: 30px;height: 30px;-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-o-transform: rotate(0deg);transform: rotate(0deg);.transition(@time: .5s,@ease: ease-in-out);z-index: 101;
@@ -164,10 +164,7 @@ body{.normal;.fsize(14px);background:@lightgrey}
 
 
   .search{.floatright;width: 30%;border: 1px solid @lightgrey;.pos-relative;
-      input[type="text"]{.floatleft; height: 40px;line-height: 40px;border: 0;
-        &.ng-pristine{background: none; }
-        &.ng-dirty{background: url(../images/loading.gif) right center no-repeat; }
-      }
+      input[type="text"]{.floatleft; height: 40px;line-height: 40px;border: 0;}
     input[type="submit"]{background: url("../images/icon-search.png") center no-repeat;height: 30px; width: 30px;background-size: cover; text-indent: -99999px;.floatright;margin: 5px 10px;}
     .searchResults{.pos-absolute;left:0;top:100%;width: 100%;background: @mediumgrey;
       ul{

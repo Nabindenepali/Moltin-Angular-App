@@ -7,7 +7,7 @@ import {DataService} from './dataService/data.service';
 
 //Gets Access Token First
 if(sessionStorage.length == 0){
-   // console.log('new Token');
+   //Gets a new access token of there is nothing in sessionStorage
     var moltin = new Moltin({publicId:Statics.PUBLIC_ID});
     moltin.Authenticate(
         function(response){
@@ -16,7 +16,7 @@ if(sessionStorage.length == 0){
         }
     )
 } else {
-    //console.log('old Token');
+    //loads the app if there is data in sessionStorage this needs a bit of tweak
     bootstrap(Store,[ROUTER_PROVIDERS,DataService,HTTP_PROVIDERS])
 }
 

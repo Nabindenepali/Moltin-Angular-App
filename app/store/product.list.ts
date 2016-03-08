@@ -19,32 +19,18 @@ export class ProductList implements OnInit{
     constructor(
       private _router : Router,
       private _dataSevice: DataService
-    ){
-        this._dataSevice.authorize();
-
-    }
+    ){}
 
     ngOnInit(){
         this.getProducts();
     }
     getProducts(){
-        //this._dataSevice.getAllProducts()
-        //    .subscribe(
-        //    res => {
-        //        if(res.status === 200 ){
-        //            this.products = res.json().result;
-        //        } else {
-        //            console.log("An error occurred calling moltin: " + res.status);
-        //        }
-        //    }
-        //)
-        //this._dataSevice.accessChecker();
-        //this._dataSevice.getData();
-
-        return this._dataSevice.getAllProducts().subscribe(
-            products => this.products = products
-
-        )
-
+        return this._dataSevice.getAllProducts()
+            .subscribe(products => this.products = products)
+    }
+    gotoDetail(slug:string) {
+        console.log(slug);
+        this._router.navigate(['ProductsDetail', {productslug:slug}]);
+        //return false;
     }
 }

@@ -26,7 +26,7 @@ System.register(['angular2/platform/browser', "angular2/router", 'angular2/http'
         execute: function() {
             //Gets Access Token First
             if (sessionStorage.length == 0) {
-                // console.log('new Token');
+                //Gets a new access token of there is nothing in sessionStorage
                 moltin = new Moltin({ publicId: service_details_1.Statics.PUBLIC_ID });
                 moltin.Authenticate(function (response) {
                     sessionStorage.setItem('access-token', JSON.stringify(response));
@@ -34,7 +34,7 @@ System.register(['angular2/platform/browser', "angular2/router", 'angular2/http'
                 });
             }
             else {
-                //console.log('old Token');
+                //loads the app if there is data in sessionStorage this needs a bit of tweak
                 browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS]);
             }
         }

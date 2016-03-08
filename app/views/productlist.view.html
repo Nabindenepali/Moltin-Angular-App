@@ -1,11 +1,11 @@
 <section class="productsList">
+    <div class="loading"></div>
     <div class="wrapper clearfix">
-        <article  *ngFor="#product of products">
+        <article  *ngFor="#product of products" (click)="gotoDetail(product.slug)">
             <figure>
                 <img src="{{product.images[0].url.https}}" alt="{{product.images.name}}">
             </figure>
             <h2>{{product.title}}</h2>
-
         </article>
     </div>
 </section>

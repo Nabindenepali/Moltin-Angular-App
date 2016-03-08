@@ -3,10 +3,12 @@ import {RouteConfig, ROUTER_PROVIDERS, ROUTER_DIRECTIVES} from "angular2/router"
 import {Control} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 import {HTTP_PROVIDERS}    from 'angular2/http';
+
 import {DataService} from './dataService/data.service';
 import {CategoryInterface} from './dataService/data.interface';
 import {ProductList} from './store/product.list';
 import {CategoryList} from './store/category.list';
+import {ProductDetail} from './store/productDetail.component';
 import {Search} from './store/search.component';
 
 @Component({
@@ -23,8 +25,13 @@ import {Search} from './store/search.component';
         path: '/store',
         name : 'Products',
         component : ProductList
-
+    },
+    {
+        path:'/store/:productslug',
+        name : 'ProductsDetail',
+        component : ProductDetail
     }
+
 ])
 
 

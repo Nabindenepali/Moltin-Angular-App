@@ -28,26 +28,19 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                 function ProductList(_router, _dataSevice) {
                     this._router = _router;
                     this._dataSevice = _dataSevice;
-                    this._dataSevice.authorize();
                 }
                 ProductList.prototype.ngOnInit = function () {
                     this.getProducts();
                 };
                 ProductList.prototype.getProducts = function () {
-                    //this._dataSevice.getAllProducts()
-                    //    .subscribe(
-                    //    res => {
-                    //        if(res.status === 200 ){
-                    //            this.products = res.json().result;
-                    //        } else {
-                    //            console.log("An error occurred calling moltin: " + res.status);
-                    //        }
-                    //    }
-                    //)
-                    //this._dataSevice.accessChecker();
-                    //this._dataSevice.getData();
                     var _this = this;
-                    return this._dataSevice.getAllProducts().subscribe(function (products) { return _this.products = products; });
+                    return this._dataSevice.getAllProducts()
+                        .subscribe(function (products) { return _this.products = products; });
+                };
+                ProductList.prototype.gotoDetail = function (slug) {
+                    console.log(slug);
+                    this._router.navigate(['ProductsDetail', { productslug: slug }]);
+                    //return false;
                 };
                 ProductList = __decorate([
                     core_1.Component({

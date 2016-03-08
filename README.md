@@ -1,4 +1,4 @@
-# eCommerce App For Moltin
+# Angular 2 App For Moltin
 
 App using Angular2 for Frontend and Moltin as the Backend and API provider.
 
