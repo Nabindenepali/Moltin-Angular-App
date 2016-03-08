@@ -1,7 +1,8 @@
-System.register(['angular2/platform/browser', "angular2/router", 'angular2/http', './app.index', './dataService/data.service'], function(exports_1, context_1) {
+System.register(['angular2/platform/browser', "angular2/router", 'angular2/http', './app.index', './dataService/service.details', './dataService/data.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var browser_1, router_1, http_1, app_index_1, data_service_1;
+    var browser_1, router_1, http_1, app_index_1, service_details_1, data_service_1;
+    var moltin;
     return {
         setters:[
             function (browser_1_1) {
@@ -16,11 +17,26 @@ System.register(['angular2/platform/browser', "angular2/router", 'angular2/http'
             function (app_index_1_1) {
                 app_index_1 = app_index_1_1;
             },
+            function (service_details_1_1) {
+                service_details_1 = service_details_1_1;
+            },
             function (data_service_1_1) {
                 data_service_1 = data_service_1_1;
             }],
         execute: function() {
-            browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS]);
+            //Gets Access Token First
+            if (sessionStorage.length == 0) {
+                // console.log('new Token');
+                moltin = new Moltin({ publicId: service_details_1.Statics.PUBLIC_ID });
+                moltin.Authenticate(function (response) {
+                    sessionStorage.setItem('access-token', JSON.stringify(response));
+                    browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS]);
+                });
+            }
+            else {
+                //console.log('old Token');
+                browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS]);
+            }
         }
     }
 });

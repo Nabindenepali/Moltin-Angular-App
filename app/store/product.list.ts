@@ -19,7 +19,10 @@ export class ProductList implements OnInit{
     constructor(
       private _router : Router,
       private _dataSevice: DataService
-    ){}
+    ){
+        this._dataSevice.authorize();
+
+    }
 
     ngOnInit(){
         this.getProducts();
@@ -35,9 +38,13 @@ export class ProductList implements OnInit{
         //        }
         //    }
         //)
-        this._dataSevice.getAllProducts().subscribe(
+        //this._dataSevice.accessChecker();
+        //this._dataSevice.getData();
+
+        return this._dataSevice.getAllProducts().subscribe(
             products => this.products = products
+
         )
-        console.log();
+
     }
 }

@@ -31,7 +31,6 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http', './service.details
                 function DataService(http) {
                     this.http = http;
                     this.currentDate = Math.floor(Date.now());
-                    this.authorize();
                 }
                 //authenticates with Moltin API and gets access token
                 DataService.prototype.authorize = function () {

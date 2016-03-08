@@ -10,21 +10,19 @@ import {Statics} from './service.details';
 @Injectable()
 export class DataService implements OnInit{
     currentDate : Date = Math.floor(Date.now());
-    //currentDate = '2457336575001';
+    //currentDate = '1457422118100';
     observable : Observable;
     moltin : any;
 
-    constructor(private http:Http){
-        this.authorize();
-    }
+    constructor(private http:Http){}
 
     //authenticates with Moltin API and gets access token
     authorize(){
-            this.moltin = new Moltin({publicId:Statics.PUBLIC_ID});
-            this.moltin.Authenticate(
-                function(response){
-                    sessionStorage.setItem('access-token' , JSON.stringify(response)                )}
-            );
+        this.moltin = new Moltin({publicId:Statics.PUBLIC_ID});
+        this.moltin.Authenticate(
+            function(response){
+                sessionStorage.setItem('access-token' , JSON.stringify(response)                )}
+        );
     }
 
     getData(dataurl:string){
@@ -35,17 +33,17 @@ export class DataService implements OnInit{
         //Checks if Token has expired
         if (this.currentDate >= session.expires){
             this.authorize();
-            //console.log('new session');
+           // console.log('new session');
         } else {
             //console.log('valid session');
         }
 
         //gets data from API
         return this.http.get(dataurl,{
-                    headers : new Headers({
-                        "Authorization" : "Bearer " + session.token
-                    })
+                headers : new Headers({
+                    "Authorization" : "Bearer " + session.token
                 })
+            })
             .map(data => data.json().result)
             .catch(this.handleError)
     }
@@ -70,4 +68,3 @@ export class DataService implements OnInit{
     }
 
 }
-

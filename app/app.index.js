@@ -34,12 +34,14 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                 function Store(_dataService) {
                     this._dataService = _dataService;
                 }
-                Store.prototype.getCategories = function () {
-                    var _this = this;
-                    this._dataService.getCategories()
-                        .subscribe(function (categories) { return _this.categories = categories; });
-                    //this._dataService.getData();
-                };
+                //getCategories(){
+                //    this._dataService.getCategories()
+                //        .subscribe(
+                //          categories => this.categories = categories
+                //    )
+                //    //this._dataService.getData();
+                //}
+                //
                 Store.prototype.showNav = function () {
                     this.toggleClass();
                 };
@@ -58,8 +60,7 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                         {
                             path: '/store',
                             name: 'Products',
-                            component: product_list_1.ProductList,
-                            useAsDefault: true
+                            component: product_list_1.ProductList
                         }
                     ]), 
                     __metadata('design:paramtypes', [data_service_1.DataService])

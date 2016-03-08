@@ -28,12 +28,12 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                 function ProductList(_router, _dataSevice) {
                     this._router = _router;
                     this._dataSevice = _dataSevice;
+                    this._dataSevice.authorize();
                 }
                 ProductList.prototype.ngOnInit = function () {
                     this.getProducts();
                 };
                 ProductList.prototype.getProducts = function () {
-                    var _this = this;
                     //this._dataSevice.getAllProducts()
                     //    .subscribe(
                     //    res => {
@@ -44,8 +44,10 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                     //        }
                     //    }
                     //)
-                    this._dataSevice.getAllProducts().subscribe(function (products) { return _this.products = products; });
-                    console.log();
+                    //this._dataSevice.accessChecker();
+                    //this._dataSevice.getData();
+                    var _this = this;
+                    return this._dataSevice.getAllProducts().subscribe(function (products) { return _this.products = products; });
                 };
                 ProductList = __decorate([
                     core_1.Component({
