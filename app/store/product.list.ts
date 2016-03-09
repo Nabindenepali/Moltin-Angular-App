@@ -30,10 +30,13 @@ export class ProductList implements OnInit{
             response => {
                 this._dataService.moltin.Product.List(null, function(products) {
                     that.products = products
-                    console.log(products);
+                    //console.log(products);
                 })
             }
         )
+        this._dataService.accessToken().subscribe(
+            res => {console.log(res)}
+        );
     }
     gotoDetail(slug:string) {
         console.log(slug);
