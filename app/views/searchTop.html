@@ -1,4 +1,4 @@
-<input type="text" [ngFormControl]="term"/>
+<input type="text" #term (keyup)="search(term.value)" />
 <div class="searchResults">
     <ul>
         <li *ngFor="#item of items | async">

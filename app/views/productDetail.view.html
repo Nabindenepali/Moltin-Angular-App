@@ -1,0 +1,10 @@
+<section class="productDetail">
+<div class="wrapper">
+    <article *ngIf="product">
+        <h1>{{product.title}}</h1>
+        <figure>
+            <img src="{{product.images[0].url.https}}" alt="">
+        </figure>
+    </article>
+</div>    
+</section>

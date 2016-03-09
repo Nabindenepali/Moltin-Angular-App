@@ -109,9 +109,9 @@ img{max-width: 100%; vertical-align: middle; border: 0;
   }
   @media @tablet,@mobile {.no-float;}
 }//column
-.col-two{.column(2,10px);}
-.col-three{.column(3,10px);}
-.col-four{.column(4,10px);}
+.col-two{.column(2,15px);}
+.col-three{.column(3,15px);}
+.col-four{.column(4,15px);}
 
 //FORM FIELDS
 
@@ -177,5 +177,11 @@ body{.normal;.fsize(14px);background:@lightgrey}
 }//header
 
 .productsList{
-  article{.col-four;}
+  article{.col-four; margin-bottom: 20px;cursor: pointer;
+      figure{height: 200px;.alcenter; background: @white;line-height: 200px;margin-bottom: 10px;
+        img{max-height: 100%;}
+      }
+    h2{.uppercase; .fsize(18px);margin-bottom: 5px}
+    h3{.normal}
+  }
 }

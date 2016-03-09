@@ -15,13 +15,23 @@ import {Observable} from "rxjs/Observable";
 
 export class Search{
         term = new Control();
-        items:Observable<string[]>;
+        items;
 
-        constructor(private _dataService:DataService){
-            this.items = this.term.valueChanges
-                .debounceTime(400)
-                .distinctUntilChanged()
-                .switchMap(term => this._dataService.search(term))
+        constructor(
+            private _dataService:DataService
+        ){}
 
+        search(searchParams:string){
+            var that = this;
+            this._dataService.authenticate()
+
+                .then(
+                response => {
+                    this._dataService.moltin.Product.Search({title:searchParams}, function(products) {
+                        that.items = products
+                    })
+                }
+            )
         }
+
 }

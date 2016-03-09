@@ -1,6 +1,4 @@
-System.register(['angular2/core', '../dataService/data.service', "angular2/router"], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', '../dataService/data.service', "angular2/router"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -25,17 +23,22 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
             }],
         execute: function() {
             ProductList = (function () {
-                function ProductList(_router, _dataSevice) {
+                function ProductList(_router, _dataService) {
                     this._router = _router;
-                    this._dataSevice = _dataSevice;
+                    this._dataService = _dataService;
                 }
                 ProductList.prototype.ngOnInit = function () {
                     this.getProducts();
                 };
                 ProductList.prototype.getProducts = function () {
                     var _this = this;
-                    return this._dataSevice.getAllProducts()
-                        .subscribe(function (products) { return _this.products = products; });
+                    var that = this;
+                    this._dataService.authenticate().then(function (response) {
+                        _this._dataService.moltin.Product.List(null, function (products) {
+                            that.products = products;
+                            console.log(products);
+                        });
+                    });
                 };
                 ProductList.prototype.gotoDetail = function (slug) {
                     console.log(slug);
@@ -52,7 +55,7 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                     __metadata('design:paramtypes', [router_1.Router, data_service_1.DataService])
                 ], ProductList);
                 return ProductList;
-            }());
+            })();
             exports_1("ProductList", ProductList);
         }
     }

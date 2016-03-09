@@ -11,12 +11,7 @@ import {ProductInterface} from '../dataService/product.interface';
 })
 
 @View({
-        template : `
-        <div ngShow="loading"></div>
-        <div *ngIf="product">
-            <h1>{{product.title}}</h1>
-        </div>
-        `
+        templateUrl :'/app/views/productDetail.view.html'
 })
 export class ProductDetail{
     product : ProductInterface;
@@ -31,11 +26,14 @@ export class ProductDetail{
     }
 
     getProduct(slug:string){
-        this._dataService.getProductDetail(slug).subscribe(
-            product => {
-                this.product = product[0];
-                console.log(product);
-            }
-        )
+        var that = this;
+        this._dataService.authenticate()
+            .then(
+                response => {
+                    this._dataService.moltin.Product.Search({slug:slug}, function(product) {
+                        that.product = product[0];
+                    })
+                }
+            )
     }
 }

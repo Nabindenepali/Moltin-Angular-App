@@ -1,6 +1,4 @@
-System.register(['angular2/core', 'angular2/common', '../dataService/data.service'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', 'angular2/common', '../dataService/data.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -26,14 +24,19 @@ System.register(['angular2/core', 'angular2/common', '../dataService/data.servic
         execute: function() {
             Search = (function () {
                 function Search(_dataService) {
-                    var _this = this;
                     this._dataService = _dataService;
                     this.term = new common_1.Control();
-                    this.items = this.term.valueChanges
-                        .debounceTime(400)
-                        .distinctUntilChanged()
-                        .switchMap(function (term) { return _this._dataService.search(term); });
                 }
+                Search.prototype.search = function (searchParams) {
+                    var _this = this;
+                    var that = this;
+                    this._dataService.authenticate()
+                        .then(function (response) {
+                        _this._dataService.moltin.Product.Search({ title: searchParams }, function (products) {
+                            that.items = products;
+                        });
+                    });
+                };
                 Search = __decorate([
                     core_1.Component({
                         selector: 'search'
@@ -44,7 +47,7 @@ System.register(['angular2/core', 'angular2/common', '../dataService/data.servic
                     __metadata('design:paramtypes', [data_service_1.DataService])
                 ], Search);
                 return Search;
-            }());
+            })();
             exports_1("Search", Search);
         }
     }

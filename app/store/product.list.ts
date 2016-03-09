@@ -18,15 +18,22 @@ export class ProductList implements OnInit{
 
     constructor(
       private _router : Router,
-      private _dataSevice: DataService
+      private _dataService: DataService
     ){}
 
     ngOnInit(){
         this.getProducts();
     }
     getProducts(){
-        return this._dataSevice.getAllProducts()
-            .subscribe(products => this.products = products)
+        var that = this;
+        this._dataService.authenticate().then(
+            response => {
+                this._dataService.moltin.Product.List(null, function(products) {
+                    that.products = products
+                    console.log(products);
+                })
+            }
+        )
     }
     gotoDetail(slug:string) {
         console.log(slug);

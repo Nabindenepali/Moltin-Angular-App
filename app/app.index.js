@@ -1,6 +1,4 @@
-System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list', './store/productDetail.component', './store/search.component'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', "angular2/router", './dataService/data.service', './store/product.list', './store/productDetail.component', './store/search.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -37,14 +35,6 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                 function Store(_dataService) {
                     this._dataService = _dataService;
                 }
-                //getCategories(){
-                //    this._dataService.getCategories()
-                //        .subscribe(
-                //          categories => this.categories = categories
-                //    )
-                //    //this._dataService.getData();
-                //}
-                //
                 Store.prototype.showNav = function () {
                     this.toggleClass();
                 };
@@ -63,7 +53,8 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                         {
                             path: '/store',
                             name: 'Products',
-                            component: product_list_1.ProductList
+                            component: product_list_1.ProductList,
+                            useAsDefault: true
                         },
                         {
                             path: '/store/:productslug',
@@ -74,7 +65,7 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                     __metadata('design:paramtypes', [data_service_1.DataService])
                 ], Store);
                 return Store;
-            }());
+            })();
             exports_1("Store", Store);
         }
     }
