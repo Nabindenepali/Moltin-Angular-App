@@ -20,13 +20,19 @@ export class DataService implements OnInit{
         })
     }
 
-    accessToken(){
-        var id = Statics.PUBLIC_ID;
-        //var secret = Statics.SECRET;
-        var creds = "client_id=" + id +  "&grant_type=implicit";
-        console.log(creds);
-        return this.http.post('https://api.molt.in/oauth/access_token?',creds)
+    getAccessToken(){
+        console.log('getaccess this has hit');
+        var creds = "client_id=" + Statics.PUBLIC_ID +  "&grant_type=implicit";         this.http.post('https://api.molt.in/oauth/access_token?',creds)                     .subscribe(response =>  this.saveToken(response.json()))
+    }
 
+    saveToken(accessres:any){
+        //sessionStorage.clear();
+        console.log('set this has hit');
+        var token = JSON.stringify(accessres.access_token);
+        var expires = JSON.stringify(accessres.expires);
+        sessionStorage.setItem('access-token' , JSON.parse(expires));
+        sessionStorage.setItem('expires' , JSON.parse(token));
+        console.log(sessionStorage);
     }
 
 }

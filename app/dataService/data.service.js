@@ -37,12 +37,20 @@ System.register(['angular2/core', './service.details', 'angular2/http'], functio
                         });
                     });
                 };
-                DataService.prototype.accessToken = function () {
-                    var id = service_details_1.Statics.PUBLIC_ID;
-                    //var secret = Statics.SECRET;
-                    var creds = "client_id=" + id + "&grant_type=implicit";
-                    console.log(creds);
-                    return this.http.post('https://api.molt.in/oauth/access_token?', creds);
+                DataService.prototype.getAccessToken = function () {
+                    var _this = this;
+                    console.log('getaccess this has hit');
+                    var creds = "client_id=" + service_details_1.Statics.PUBLIC_ID + "&grant_type=implicit";
+                    this.http.post('https://api.molt.in/oauth/access_token?', creds).subscribe(function (response) { return _this.saveToken(response.json()); });
+                };
+                DataService.prototype.saveToken = function (accessres) {
+                    //sessionStorage.clear();
+                    console.log('set this has hit');
+                    var token = JSON.stringify(accessres.access_token);
+                    var expires = JSON.stringify(accessres.expires);
+                    sessionStorage.setItem('access-token', JSON.parse(expires));
+                    sessionStorage.setItem('expires', JSON.parse(token));
+                    console.log(sessionStorage);
                 };
                 DataService = __decorate([
                     core_1.Injectable(), 

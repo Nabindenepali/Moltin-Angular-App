@@ -40,7 +40,15 @@ export class Store implements OnInit{
     categories : CategoryInterface[];
     constructor(
         private _dataService : DataService
-    ){}
+    ){
+        console.log('app store hit')
+        if(sessionStorage.length == 0){
+            console.log('no access token');
+            this._dataService.getAccessToken();
+        } else {
+            console.log('access token available');
+        }
+    }
 
     showNav(){
         this.toggleClass();

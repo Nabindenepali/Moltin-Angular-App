@@ -6,7 +6,7 @@ import {Statics} from './dataService/service.details';
 import {DataService} from './dataService/data.service';
 import {init} from "typings/dist/init";
 
-       bootstrap(Store,[ROUTER_PROVIDERS,DataService,HTTP_PROVIDERS])
+bootstrap(Store,[ROUTER_PROVIDERS,DataService,HTTP_PROVIDERS])
 
 
 

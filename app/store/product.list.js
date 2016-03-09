@@ -30,6 +30,7 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                     this._dataService = _dataService;
                 }
                 ProductList.prototype.ngOnInit = function () {
+                    console.log('list hit');
                     this.getProducts();
                 };
                 ProductList.prototype.getProducts = function () {
@@ -38,10 +39,9 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                     this._dataService.authenticate().then(function (response) {
                         _this._dataService.moltin.Product.List(null, function (products) {
                             that.products = products;
-                            //console.log(products);
+                            console.log(products);
                         });
                     });
-                    this._dataService.accessToken().subscribe(function (res) { console.log(res); });
                 };
                 ProductList.prototype.gotoDetail = function (slug) {
                     console.log(slug);

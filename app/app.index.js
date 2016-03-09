@@ -36,6 +36,14 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
             Store = (function () {
                 function Store(_dataService) {
                     this._dataService = _dataService;
+                    console.log('app store hit');
+                    if (sessionStorage.length == 0) {
+                        console.log('no access token');
+                        this._dataService.getAccessToken();
+                    }
+                    else {
+                        console.log('access token available');
+                    }
                 }
                 Store.prototype.showNav = function () {
                     this.toggleClass();
