@@ -22,19 +22,12 @@ export class ProductList implements OnInit{
     ){}
 
     ngOnInit(){
-        console.log('list hit');
         this.getProducts();
     }
     getProducts(){
-        var that = this;
-        this._dataService.authenticate().then(
-            response => {
-                this._dataService.moltin.Product.List(null, function(products) {
-                    that.products = products
-                    console.log(products);
-                })
-            }
-        )
+        this._dataService.getAllProducts().subscribe(
+            products => this.products = products
+        );
 
     }
     gotoDetail(slug:string) {

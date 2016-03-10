@@ -30,18 +30,11 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                     this._dataService = _dataService;
                 }
                 ProductList.prototype.ngOnInit = function () {
-                    console.log('list hit');
                     this.getProducts();
                 };
                 ProductList.prototype.getProducts = function () {
                     var _this = this;
-                    var that = this;
-                    this._dataService.authenticate().then(function (response) {
-                        _this._dataService.moltin.Product.List(null, function (products) {
-                            that.products = products;
-                            console.log(products);
-                        });
-                    });
+                    this._dataService.getAllProducts().subscribe(function (products) { return _this.products = products; });
                 };
                 ProductList.prototype.gotoDetail = function (slug) {
                     console.log(slug);

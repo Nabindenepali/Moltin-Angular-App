@@ -1,4 +1,4 @@
-System.register(['angular2/core', './service.details', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/Rx', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,15 @@ System.register(['angular2/core', './service.details', 'angular2/http'], functio
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, service_details_1, http_1;
+    var core_1, Rx_1, http_1;
     var DataService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (service_details_1_1) {
-                service_details_1 = service_details_1_1;
+            function (Rx_1_1) {
+                Rx_1 = Rx_1_1;
             },
             function (http_1_1) {
                 http_1 = http_1_1;
@@ -27,30 +27,26 @@ System.register(['angular2/core', './service.details', 'angular2/http'], functio
             DataService = (function () {
                 function DataService(http) {
                     this.http = http;
-                    this.moltin = new Moltin({ publicId: service_details_1.Statics.PUBLIC_ID });
                 }
-                DataService.prototype.authenticate = function () {
-                    var _this = this;
-                    return new Promise(function (resolve, reject) {
-                        _this.moltin.Authenticate(function (response) {
-                            resolve(response);
-                        });
-                    });
+                DataService.prototype.fetchData = function (dataurl) {
+                    var token = sessionStorage.getItem('access-token');
+                    return this.http.get(dataurl, {
+                        headers: new http_1.Headers({
+                            "Authorization": "Bearer " + token
+                        })
+                    })
+                        .map(function (data) { return data.json().result; })
+                        .catch(this.handleError);
                 };
-                DataService.prototype.getAccessToken = function () {
-                    var _this = this;
-                    console.log('getaccess this has hit');
-                    var creds = "client_id=" + service_details_1.Statics.PUBLIC_ID + "&grant_type=implicit";
-                    this.http.post('https://api.molt.in/oauth/access_token?', creds).subscribe(function (response) { return _this.saveToken(response.json()); });
+                DataService.prototype.getAllProducts = function () {
+                    return this.fetchData('https://api.molt.in/v1/products');
                 };
-                DataService.prototype.saveToken = function (accessres) {
-                    //sessionStorage.clear();
-                    console.log('set this has hit');
-                    var token = JSON.stringify(accessres.access_token);
-                    var expires = JSON.stringify(accessres.expires);
-                    sessionStorage.setItem('access-token', JSON.parse(expires));
-                    sessionStorage.setItem('expires', JSON.parse(token));
-                    console.log(sessionStorage);
+                DataService.prototype.getProductDetail = function (slug) {
+                    return this.fetchData('https://api.molt.in/v1/products/search?slug=' + slug);
+                };
+                DataService.prototype.handleError = function (error) {
+                    console.error(error);
+                    return Rx_1.Observable.throw(error.json().error || 'Server error');
                 };
                 DataService = __decorate([
                     core_1.Injectable(), 

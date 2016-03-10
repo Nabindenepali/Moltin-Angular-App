@@ -26,14 +26,8 @@ export class ProductDetail{
     }
 
     getProduct(slug:string){
-        var that = this;
-        this._dataService.authenticate()
-            .then(
-                response => {
-                    this._dataService.moltin.Product.Search({slug:slug}, function(product) {
-                        that.product = product[0];
-                    })
-                }
-            )
+        this._dataService.getProductDetail(slug).subscribe(
+            product => this.product = product[0]
+        )
     }
 }
