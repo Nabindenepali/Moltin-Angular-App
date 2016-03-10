@@ -36,7 +36,12 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
             Store = (function () {
                 function Store(_dataService) {
                     this._dataService = _dataService;
+                    this.getCategories();
                 }
+                Store.prototype.getCategories = function () {
+                    var _this = this;
+                    this._dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; });
+                };
                 Store.prototype.showNav = function () {
                     this.toggleClass();
                 };
@@ -55,8 +60,7 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                         {
                             path: '/store',
                             name: 'Products',
-                            component: product_list_1.ProductList,
-                            useAsDefault: true
+                            component: product_list_1.ProductList
                         },
                         {
                             path: '/store/:productslug',

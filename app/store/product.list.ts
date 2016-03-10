@@ -14,6 +14,7 @@ import {Router} from "angular2/router";
 
 export class ProductList implements OnInit{
         products : ProductInterface[];
+        private isFetching: boolean = false;
 
 
     constructor(
@@ -26,7 +27,10 @@ export class ProductList implements OnInit{
     }
     getProducts(){
         this._dataService.getAllProducts().subscribe(
-            products => this.products = products
+            products => {
+                this.products = products;
+                this.isFetching = true;
+            }
         );
 
     }

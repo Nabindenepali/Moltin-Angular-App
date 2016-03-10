@@ -44,6 +44,9 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http'], function(exports_
                 DataService.prototype.getProductDetail = function (slug) {
                     return this.fetchData('https://api.molt.in/v1/products/search?slug=' + slug);
                 };
+                DataService.prototype.getCategories = function () {
+                    return this.fetchData('https://api.molt.in/v1/categories');
+                };
                 DataService.prototype.handleError = function (error) {
                     console.error(error);
                     return Rx_1.Observable.throw(error.json().error || 'Server error');

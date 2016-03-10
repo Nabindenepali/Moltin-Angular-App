@@ -29,6 +29,9 @@ export class DataService implements OnInit{
         return this.fetchData('https://api.molt.in/v1/products/search?slug='+slug);
 
     }
+    getCategories(){
+        return this.fetchData('https://api.molt.in/v1/categories');
+    }
 
 
 

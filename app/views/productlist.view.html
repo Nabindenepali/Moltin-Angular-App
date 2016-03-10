@@ -1,5 +1,8 @@
+<div class="loading" [hidden]="isFetching">
+    <img src="assets/images/three-dots.svg" width="50">
+</div>
 <section class="productsList">
-    <div class="loading"></div>
+
     <div class="wrapper clearfix">
         <article  *ngFor="#product of products" (click)="gotoDetail(product.slug)">
             <figure>

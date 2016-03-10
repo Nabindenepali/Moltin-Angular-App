@@ -24,8 +24,7 @@ import {Search} from './store/search.component';
     {
         path: '/store',
         name : 'Products',
-        component : ProductList,
-        useAsDefault: true
+        component : ProductList
     },
     {
         path:'/store/:productslug',
@@ -40,7 +39,15 @@ export class Store implements OnInit{
     categories : CategoryInterface[];
     constructor(
         private _dataService : DataService
-    ){}
+    ){
+        this.getCategories();
+    }
+
+    getCategories(){
+        this._dataService.getCategories().subscribe(
+            categories => this.categories = categories
+        )
+    }
 
     showNav(){
         this.toggleClass();

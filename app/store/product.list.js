@@ -28,13 +28,17 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                 function ProductList(_router, _dataService) {
                     this._router = _router;
                     this._dataService = _dataService;
+                    this.isFetching = false;
                 }
                 ProductList.prototype.ngOnInit = function () {
                     this.getProducts();
                 };
                 ProductList.prototype.getProducts = function () {
                     var _this = this;
-                    this._dataService.getAllProducts().subscribe(function (products) { return _this.products = products; });
+                    this._dataService.getAllProducts().subscribe(function (products) {
+                        _this.products = products;
+                        _this.isFetching = true;
+                    });
                 };
                 ProductList.prototype.gotoDetail = function (slug) {
                     console.log(slug);

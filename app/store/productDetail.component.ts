@@ -15,6 +15,7 @@ import {ProductInterface} from '../dataService/product.interface';
 })
 export class ProductDetail{
     product : ProductInterface;
+    private isFetching: boolean = false;
     constructor(
         private _dataService: DataService,
         private _routeParams: RouteParams
@@ -27,7 +28,11 @@ export class ProductDetail{
 
     getProduct(slug:string){
         this._dataService.getProductDetail(slug).subscribe(
-            product => this.product = product[0]
+            product => {
+                this.product = product[0];
+                this.isFetching = true;
+
+            }
         )
     }
 }
