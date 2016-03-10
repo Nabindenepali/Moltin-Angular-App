@@ -1,0 +1,33 @@
+<div class="loading" [hidden]="isFetching">
+    <img src="assets/images/three-dots.svg" width="50">
+</div>
+
+<div class="product-details" *ngIf="product"><!--product-details-->
+    <div class="col-sm-5">
+        <div class="view-product">
+            <img src="{{product.images[0].url.https}}" alt="{{product.images.name}}" />
+            <h3>ZOOM</h3>
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="product-information"><!--/product-information-->
+            <img src="/assets/images/product-details/new.jpg" class="newarrival" alt="" />
+            <h2>{{product.title}}</h2>
+            <p>Web ID: {{product.id}}</p>
+            <img src="/assets/images/product-details/rating.png" alt="" />
+								<span>
+									<span>${{product.price.data.raw.with_tax}}</span>
+									<label>Quantity:</label>
+									<input type="text" value="3" />
+									<button type="button" class="btn btn-fefault cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                    </button>
+								</span>
+            <p><b>Availability:</b> {{product.stock_status.data.value}}</p>
+            <p><b>Condition:</b> New</p>
+            <!--<p><b>Brand:</b> {{product.brand.value}}</p>-->
+            <a href=""><img src="/assets/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+        </div><!--/product-information-->
+    </div>
+</div><!--/product-details-->

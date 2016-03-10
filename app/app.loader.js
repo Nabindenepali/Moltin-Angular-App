@@ -54,13 +54,14 @@ System.register(['angular2/platform/browser', "angular2/router", 'angular2/http'
         execute: function() {
             currentDate = Math.floor(Date.now() / 1000);
             //var currentDate = 1457585941;
+            console.log(currentDate);
             if (sessionStorage.length == 0 || sessionStorage.expires <= currentDate) {
                 console.log('Fetching Access Token');
                 getAccessToken();
             }
             else {
                 console.log('Using Available Access Token');
-                console.log(sessionStorage);
+                //console.log(sessionStorage);
                 browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS]);
             }
         }

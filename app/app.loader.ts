@@ -8,6 +8,7 @@ import {init} from "typings/dist/init";
 
 var currentDate = Math.floor(Date.now()/1000);
 //var currentDate = 1457585941;
+console.log(currentDate);
 
 
 if(sessionStorage.length == 0 || sessionStorage.expires <= currentDate){
@@ -15,7 +16,7 @@ if(sessionStorage.length == 0 || sessionStorage.expires <= currentDate){
     getAccessToken();
 } else {
     console.log('Using Available Access Token');
-    console.log(sessionStorage);
+    //console.log(sessionStorage);
     bootstrap(Store,[ROUTER_PROVIDERS,DataService,HTTP_PROVIDERS])
 }
 

@@ -42,10 +42,19 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http'], function(exports_
                     return this.fetchData('https://api.molt.in/v1/products');
                 };
                 DataService.prototype.getProductDetail = function (slug) {
-                    return this.fetchData('https://api.molt.in/v1/products/search?slug=' + slug);
+                    return this.fetchData('https://api.molt.in/v1/products?slug=' + slug);
+                };
+                DataService.prototype.getProductByCategory = function (slug) {
+                    return this.fetchData('https://api.molt.in/v1/products?category.slug=' + slug);
                 };
                 DataService.prototype.getCategories = function () {
                     return this.fetchData('https://api.molt.in/v1/categories');
+                };
+                DataService.prototype.getBrands = function () {
+                    return this.fetchData('https://api.molt.in/v1/brands');
+                };
+                DataService.prototype.getCategoryID = function (slug) {
+                    return this.fetchData('https://api.molt.in/v1/categories/search?slug=' + slug);
                 };
                 DataService.prototype.handleError = function (error) {
                     console.error(error);

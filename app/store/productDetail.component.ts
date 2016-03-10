@@ -11,7 +11,7 @@ import {ProductInterface} from '../dataService/product.interface';
 })
 
 @View({
-        templateUrl :'/app/views/productDetail.view.html'
+        templateUrl :'/app/views/productDetail.partial.html'
 })
 export class ProductDetail{
     product : ProductInterface;

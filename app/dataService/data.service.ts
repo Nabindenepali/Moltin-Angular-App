@@ -24,13 +24,21 @@ export class DataService implements OnInit{
     getAllProducts(){
         return this.fetchData('https://api.molt.in/v1/products');
     }
-
     getProductDetail(slug:string){
-        return this.fetchData('https://api.molt.in/v1/products/search?slug='+slug);
-
+        return this.fetchData('https://api.molt.in/v1/products?slug='+slug);
+    }
+    getProductByCategory(slug:string){
+        return this.fetchData('https://api.molt.in/v1/products?category.slug='+slug);
     }
     getCategories(){
         return this.fetchData('https://api.molt.in/v1/categories');
+    }
+    getBrands(){
+        return this.fetchData('https://api.molt.in/v1/brands');
+    }
+    getCategoryID(slug:string){
+        return this.fetchData('https://api.molt.in/v1/categories/search?slug='+slug);
+
     }
 
 

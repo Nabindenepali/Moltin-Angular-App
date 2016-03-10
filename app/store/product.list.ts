@@ -8,7 +8,7 @@ import {Router} from "angular2/router";
 })
 
 @View({
-   templateUrl : '/app/views/productlist.view.html'
+   templateUrl : '/app/views/productlist.partial.html'
 })
 
 
@@ -29,6 +29,7 @@ export class ProductList implements OnInit{
         this._dataService.getAllProducts().subscribe(
             products => {
                 this.products = products;
+                console.log(products);
                 this.isFetching = true;
             }
         );
@@ -37,6 +38,6 @@ export class ProductList implements OnInit{
     gotoDetail(slug:string) {
         console.log(slug);
         this._router.navigate(['ProductsDetail', {productslug:slug}]);
-        //return false;
+        return false;
     }
 }

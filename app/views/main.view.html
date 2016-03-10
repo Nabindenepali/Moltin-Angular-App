@@ -58,8 +58,6 @@
         </div>
     </div><!--/header-bottom-->
 </header><!--/header-->
-
-
 <section>
     <div class="container">
         <div class="row">
@@ -70,7 +68,7 @@
                         <div class="panel panel-default" *ngFor="#category of categories">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                                    <a data-toggle="collapse" data-parent="#accordian" href="store/category/{{category.slug}}" (click)="gotoCategoryDetail(category.slug)">
                                         <span class="badge pull-right"><i class="fa fa-angle-right"></i></span>
                                         {{category.title}}
                                     </a>
@@ -78,12 +76,26 @@
                             </div>
                         </div>
                     </div><!--/category-products-->
+                    <div class="brands_products"><!--brands_products-->
+                        <h2>Brands</h2>
+                        <div class="brands-name">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li *ngFor="#brand of brands">
+                                    <a href="#">{{brand.title}}</a></li>
+
+                            </ul>
+                        </div>
+                    </div><!--/brands_products-->
 
 
                 </div>
+            </div>
+            <div class="col-sm-9 padding-right">
+                <router-outlet></router-outlet>
+
             </div>
         </div>
     </div>
 </section>
 
-<router-outlet></router-outlet>
+

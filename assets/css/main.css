@@ -63,13 +63,32 @@ a#scrollUp {
 a#scrollUp i{
   font-size: 30px;
 }
-
-
-.loading {
+.apploading {
     position: fixed;
     z-index: 1000;
     top: 0;
     left: 0;
+    min-height: 200px;
+    height: 100%;
+    width: 100%;
+}
+.apploading img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.loading {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    min-height: 200px;
     height: 100%;
     width: 100%;
 }
@@ -900,6 +919,10 @@ h2.title {
   font-size: 14px;
   font-weight: 400;
   color: #696763;
+    min-height: 50px;
+}
+.productinfo p a{
+    color: #696763;
 }
 
 .productinfo img{

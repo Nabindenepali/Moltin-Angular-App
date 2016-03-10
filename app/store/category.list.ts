@@ -1,30 +1,49 @@
 import {Component, View, OnInit} from 'angular2/core';
 import {DataService} from '../dataService/data.service';
 import {ProductInterface} from '../dataService/product.interface';
-import {Router} from "angular2/router";
+import {Router,RouteParams} from "angular2/router";
 
 @Component({
-    selector : 'product-list'
+    selector : 'category-list'
 })
 
 @View({
-    templateUrl : '/app/views/productlist.view.html'
+    templateUrl : '/app/views/productlist.partial.html'
 })
 
 
 export class CategoryList implements OnInit{
-    products;
+    products:ProductInterface[];
+    categoryName: string;
+    private isFetching: boolean = false;
 
 
     constructor(
         private _router : Router,
+        private _routeParams: RouteParams,
         private _dataSevice: DataService
     ){}
 
     ngOnInit(){
-        this.getProducts();
+        let slug = this._routeParams.get('categoryname');
+        this.getproductsbycategory(slug);
     }
-    getProducts(){
-        this.products = this._dataSevice.getAllCategories();
+
+    getproductsbycategory(slug:string){
+        this.categoryName = slug;
+        this._dataSevice.getProductByCategory(slug).subscribe(
+            products => {
+                this.products = products;
+                this.isFetching = true
+            }
+        )
+    }
+
+
+
+    gotoDetail(slug:string) {
+        console.log(slug);
+        this._router.navigate(['ProductsDetail', {productslug:slug}]);
+        return false;
     }
 }

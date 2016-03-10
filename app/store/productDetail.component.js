@@ -46,7 +46,7 @@ System.register(['angular2/core', 'angular2/router', '../dataService/data.servic
                         selector: 'product-detail'
                     }),
                     core_1.View({
-                        templateUrl: '/app/views/productDetail.view.html'
+                        templateUrl: '/app/views/productDetail.partial.html'
                     }), 
                     __metadata('design:paramtypes', [data_service_1.DataService, router_1.RouteParams])
                 ], ProductDetail);

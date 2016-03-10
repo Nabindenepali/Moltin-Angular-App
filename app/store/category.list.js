@@ -25,24 +25,37 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
             }],
         execute: function() {
             CategoryList = (function () {
-                function CategoryList(_router, _dataSevice) {
+                function CategoryList(_router, _routeParams, _dataSevice) {
                     this._router = _router;
+                    this._routeParams = _routeParams;
                     this._dataSevice = _dataSevice;
+                    this.isFetching = false;
                 }
                 CategoryList.prototype.ngOnInit = function () {
-                    this.getProducts();
+                    var slug = this._routeParams.get('categoryname');
+                    this.getproductsbycategory(slug);
                 };
-                CategoryList.prototype.getProducts = function () {
-                    this.products = this._dataSevice.getAllCategories();
+                CategoryList.prototype.getproductsbycategory = function (slug) {
+                    var _this = this;
+                    this.categoryName = slug;
+                    this._dataSevice.getProductByCategory(slug).subscribe(function (products) {
+                        _this.products = products;
+                        _this.isFetching = true;
+                    });
+                };
+                CategoryList.prototype.gotoDetail = function (slug) {
+                    console.log(slug);
+                    this._router.navigate(['ProductsDetail', { productslug: slug }]);
+                    return false;
                 };
                 CategoryList = __decorate([
                     core_1.Component({
-                        selector: 'product-list'
+                        selector: 'category-list'
                     }),
                     core_1.View({
-                        templateUrl: '/app/views/productlist.view.html'
+                        templateUrl: '/app/views/productlist.partial.html'
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, data_service_1.DataService])
+                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, data_service_1.DataService])
                 ], CategoryList);
                 return CategoryList;
             }());
