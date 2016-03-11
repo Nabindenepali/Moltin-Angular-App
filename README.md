@@ -48,6 +48,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Node.js Server and TypeScript compiler setup done according to offical Angular 2 Site https://angular.io/
+* Moltin for its ecommerce API http://moltin.com/
 
 
 
