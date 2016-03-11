@@ -27,19 +27,33 @@ export class DataService implements OnInit{
     getProductDetail(slug:string){
         return this.fetchData('https://api.molt.in/v1/products?slug='+slug);
     }
-    getProductByCategory(slug:string){
-        return this.fetchData('https://api.molt.in/v1/products?category.slug='+slug);
+
+    getProductByBrand(slug:string){
+        return this.fetchData('https://api.molt.in/v1/products?brand.slug='+slug);
     }
+
     getCategories(){
         return this.fetchData('https://api.molt.in/v1/categories');
     }
-    getBrands(){
-        return this.fetchData('https://api.molt.in/v1/brands');
+
+    getFeatured(slug:string){
+            return this.fetchData('https://api.molt.in/v1/products?collection.slug=featured-products');
     }
+
     getCategoryID(slug:string){
         return this.fetchData('https://api.molt.in/v1/categories/search?slug='+slug);
 
     }
+
+    getProductByCategory(slug:string){
+        return this.fetchData('https://api.molt.in/v1/products?category.slug='+slug);
+    }
+
+    getBrands(){
+        return this.fetchData('https://api.molt.in/v1/brands');
+    }
+
+
 
 
 

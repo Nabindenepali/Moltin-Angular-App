@@ -4,21 +4,19 @@ import {ProductInterface} from '../dataService/product.interface';
 import {Router,RouteParams} from "angular2/router";
 
 @Component({
-    selector : 'category-list'
+    selector : 'brand-list'
 })
 
 @View({
     templateUrl :'/app/views/list-product.partial.html'
 })
 
-
-export class CategoryList implements OnInit{
+export class BrandList implements OnInit{
     products:ProductInterface[];
     title : string;
-    categoryName: string;
+    brandName : string;
 
     private isFetching: boolean = false;
-
 
     constructor(
         private _router : Router,
@@ -27,17 +25,18 @@ export class CategoryList implements OnInit{
     ){}
 
     ngOnInit(){
-        let slug = this._routeParams.get('categoryname');
-        this.getproductsbycategory(slug);
-        this.title = 'Products in category: ' + slug.replace(/-/g,' ');
+        let slug = this._routeParams.get('brandname');
+        this.getproductsbybrand(slug);
+        this.title = 'Products of brand: ' + slug.replace(/-/g,' ');
     }
 
-    getproductsbycategory(slug:string){
-        this.categoryName = slug;
-        this._dataSevice.getProductByCategory(slug).subscribe(
+    getproductsbybrand(slug:string){
+        this.brandName = slug;
+        this._dataSevice.getProductByBrand(slug).subscribe(
             products => {
                 this.products = products;
-                this.isFetching = true
+                console.log(products);
+                this.isFetching = true;
             }
         )
     }
@@ -47,4 +46,7 @@ export class CategoryList implements OnInit{
         this._router.navigate(['ProductsDetail', {productslug:slug}]);
         return false;
     }
+
+
+
 }

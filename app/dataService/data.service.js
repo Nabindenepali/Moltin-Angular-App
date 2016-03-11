@@ -44,17 +44,23 @@ System.register(['angular2/core', 'rxjs/Rx', 'angular2/http'], function(exports_
                 DataService.prototype.getProductDetail = function (slug) {
                     return this.fetchData('https://api.molt.in/v1/products?slug=' + slug);
                 };
-                DataService.prototype.getProductByCategory = function (slug) {
-                    return this.fetchData('https://api.molt.in/v1/products?category.slug=' + slug);
+                DataService.prototype.getProductByBrand = function (slug) {
+                    return this.fetchData('https://api.molt.in/v1/products?brand.slug=' + slug);
                 };
                 DataService.prototype.getCategories = function () {
                     return this.fetchData('https://api.molt.in/v1/categories');
                 };
-                DataService.prototype.getBrands = function () {
-                    return this.fetchData('https://api.molt.in/v1/brands');
+                DataService.prototype.getFeatured = function (slug) {
+                    return this.fetchData('https://api.molt.in/v1/products?collection.slug=featured-products');
                 };
                 DataService.prototype.getCategoryID = function (slug) {
                     return this.fetchData('https://api.molt.in/v1/categories/search?slug=' + slug);
+                };
+                DataService.prototype.getProductByCategory = function (slug) {
+                    return this.fetchData('https://api.molt.in/v1/products?category.slug=' + slug);
+                };
+                DataService.prototype.getBrands = function () {
+                    return this.fetchData('https://api.molt.in/v1/brands');
                 };
                 DataService.prototype.handleError = function (error) {
                     console.error(error);

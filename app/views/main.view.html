@@ -39,7 +39,7 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="/" class="active">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li>
                                 <a href="#" [routerLink]="['Products']">Store</a>
 
@@ -81,7 +81,7 @@
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
                                 <li *ngFor="#brand of brands">
-                                    <a href="#">{{brand.title}}</a></li>
+                                    <a href="store/brand/{{brand.slug}}"(click)="gotoBrandDetail(brand.slug)">{{brand.title}}</a></li>
 
                             </ul>
                         </div>

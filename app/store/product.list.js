@@ -31,13 +31,14 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                     this.isFetching = false;
                 }
                 ProductList.prototype.ngOnInit = function () {
+                    this.title = 'All Products';
                     this.getProducts();
                 };
                 ProductList.prototype.getProducts = function () {
                     var _this = this;
                     this._dataService.getAllProducts().subscribe(function (products) {
                         _this.products = products;
-                        console.log(products);
+                        //console.log(products);
                         _this.isFetching = true;
                     });
                 };
@@ -51,7 +52,7 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                         selector: 'product-list'
                     }),
                     core_1.View({
-                        templateUrl: '/app/views/productlist.partial.html'
+                        templateUrl: '/app/views/list-product.partial.html'
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, data_service_1.DataService])
                 ], ProductList);

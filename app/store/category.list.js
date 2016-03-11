@@ -34,6 +34,7 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                 CategoryList.prototype.ngOnInit = function () {
                     var slug = this._routeParams.get('categoryname');
                     this.getproductsbycategory(slug);
+                    this.title = 'Products in category: ' + slug.replace(/-/g, ' ');
                 };
                 CategoryList.prototype.getproductsbycategory = function (slug) {
                     var _this = this;
@@ -53,7 +54,7 @@ System.register(['angular2/core', '../dataService/data.service', "angular2/route
                         selector: 'category-list'
                     }),
                     core_1.View({
-                        templateUrl: '/app/views/productlist.partial.html'
+                        templateUrl: '/app/views/list-product.partial.html'
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, data_service_1.DataService])
                 ], CategoryList);

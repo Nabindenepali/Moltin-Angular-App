@@ -8,12 +8,13 @@ import {Router} from "angular2/router";
 })
 
 @View({
-   templateUrl : '/app/views/productlist.partial.html'
+    templateUrl :'/app/views/list-product.partial.html'
 })
 
 
 export class ProductList implements OnInit{
         products : ProductInterface[];
+        title: string;
         private isFetching: boolean = false;
 
 
@@ -23,13 +24,14 @@ export class ProductList implements OnInit{
     ){}
 
     ngOnInit(){
+        this.title = 'All Products';
         this.getProducts();
     }
     getProducts(){
         this._dataService.getAllProducts().subscribe(
             products => {
                 this.products = products;
-                console.log(products);
+                //console.log(products);
                 this.isFetching = true;
             }
         );

@@ -7,8 +7,10 @@ import {HTTP_PROVIDERS}    from 'angular2/http';
 import {DataService} from './dataService/data.service';
 import {CategoryInterface} from './dataService/data.interface';
 import {BrandsInterface} from './dataService/brands.interface'
+import {HomeList} from './store/home.list';
 import {ProductList} from './store/product.list';
 import {CategoryList} from './store/category.list';
+import {BrandList} from './store/brand.list'
 import {ProductDetail} from './store/productDetail.component';
 import {Search} from './store/search.component';
 
@@ -22,9 +24,11 @@ import {Search} from './store/search.component';
 })
 
 @RouteConfig([
-    {path: '/store',name : 'Products',component : ProductList,useAsDefault: true},
+    {path: '/',name : 'Home',component : HomeList},
+    {path: '/store',name : 'Products',component : ProductList},
     {path:'/store/:productslug',name : 'ProductsDetail',component : ProductDetail},
-    {path:'/store/category/:categoryname',name : 'CategoryDetail',component : CategoryList}
+    {path:'/store/category/:categoryname',name : 'CategoryDetail',component : CategoryList},
+    {path:'/store/brand/:brandname',name : 'BrandDetail',component : BrandList}
 ])
 
 
@@ -47,7 +51,6 @@ export class Store implements OnInit{
         this._dataService.getBrands().subscribe(
             brands => {
                 this.brands = brands;
-
             }
         )
     }
@@ -57,9 +60,10 @@ export class Store implements OnInit{
         return false;
     }
 
-
-    gotoBrandDetail(){
-
+    gotoBrandDetail(slug:string){
+        console.log(slug);
+        this._router.navigate(['BrandDetail', {brandname:slug}]);
+        return false;
     }
 
     showNav(){
