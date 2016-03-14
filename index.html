@@ -25,11 +25,9 @@
     <link href="assets/css/responsive.css" rel="stylesheet">
 
 
-    <script src="app/vendors/moltin.min.js"></script>
+    <script src="https://js.moltin.com/v1"></script>
     <!-- 2. Configure SystemJS -->
     <script>
-
-
         System.config({
             packages: {
                 app: {
@@ -40,7 +38,6 @@
         });
         System.import('app/app.loader')
                     .then(null, console.error.bind(console));
-
 
 
 

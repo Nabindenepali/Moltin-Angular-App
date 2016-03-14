@@ -1,6 +1,6 @@
 import {bootstrap} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS} from "angular2/router";
-import {HTTP_PROVIDERS}    from 'angular2/http';
+import {HTTP_PROVIDERS,JSONP_PROVIDERS}    from 'angular2/http';
 import {Store} from './app.index';
 import {Statics} from './dataService/service.details';
 import {DataService} from './dataService/data.service';
@@ -11,13 +11,14 @@ var currentDate = Math.floor(Date.now()/1000);
 console.log(currentDate);
 
 
+
 if(sessionStorage.length == 0 || sessionStorage.expires <= currentDate){
     console.log('Fetching Access Token');
     getAccessToken();
 } else {
     console.log('Using Available Access Token');
     //console.log(sessionStorage);
-    bootstrap(Store,[ROUTER_PROVIDERS,DataService,HTTP_PROVIDERS])
+    bootstrap(Store,[ROUTER_PROVIDERS,DataService,HTTP_PROVIDERS,JSONP_PROVIDERS])
 }
 
 //GET ACCESS TOKEN
@@ -42,7 +43,7 @@ function getAccessToken(){
         sessionStorage.setItem('access-token' , JSON.parse(data).access_token);
         sessionStorage.setItem('expires' , JSON.parse(data).expires);
         console.log(sessionStorage);
-        bootstrap(Store,[ROUTER_PROVIDERS,DataService,HTTP_PROVIDERS])
+        bootstrap(Store,[ROUTER_PROVIDERS,DataService,HTTP_PROVIDERS,JSONP_PROVIDERS])
     }, function(error) {
         console.log(error.message);
     });

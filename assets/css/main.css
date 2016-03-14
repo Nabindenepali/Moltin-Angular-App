@@ -2,9 +2,9 @@
 /*************************
 *******Typography******
 **************************/
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
-@import url(http://fonts.googleapis.com/css?family=Abel);
+@import url('http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700');
+@import url('http://fonts.googleapis.com/css?family=Abel');
 
 
 
@@ -12,7 +12,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background:;
   position: relative;
-  font-weight:400px;
+  font-weight:400;
 }
 
 ul li {
@@ -84,6 +84,7 @@ a#scrollUp i{
 }
 
 .loading {
+    background: #fff;
     position: absolute;
     z-index: 1000;
     top: 0;
@@ -697,6 +698,7 @@ ul.sub-menu {
   margin-bottom: 35px;
   padding-bottom: 20px;
   padding-top: 15px;
+  position: relative;
 }
 .left-sidebar h2, .brands_products h2 {
   color: #FE980F;
@@ -803,6 +805,7 @@ h2.title:before{
   border: 1px solid #F7F7F0;
   padding-bottom: 20px;
   padding-top: 15px;
+  position: relative;
 }
 
 
@@ -942,7 +945,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
+  /*opacity:;*/
 }
 
 .single-products:hover .product-overlay {
@@ -2184,7 +2187,7 @@ h2.title {
 
 .rating-area {
   border: 1px solid #F7F7F0;
-  direction: block;
+  /*direction: block;*/
   overflow: hidden;
 }
 

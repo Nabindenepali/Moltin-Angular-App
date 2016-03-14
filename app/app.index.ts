@@ -35,17 +35,23 @@ import {Search} from './store/search.component';
 export class Store implements OnInit{
     categories : CategoryInterface[];
     brands: BrandsInterface[];
+    private isFetching: boolean = false;
     constructor(
         private _dataService : DataService,
         private _router : Router
+
     ){
+        let cartID = Math.floor(100000 + Math.random() * 900000);
+        sessionStorage.setItem('cartID' , JSON.parse(cartID));
         this.homeData();
     }
 
     homeData(){
+
         this._dataService.getCategories().subscribe(
             categories => {
                 this.categories = categories;
+                this.isFetching = true;
             }
         )
         this._dataService.getBrands().subscribe(
@@ -66,15 +72,9 @@ export class Store implements OnInit{
         return false;
     }
 
-    showNav(){
-        this.toggleClass();
-    }
-
-    toggleClass(){
-        this.addClass = !this.addClass;
-    }
-
 }
+
+
 
 
 

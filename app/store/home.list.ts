@@ -2,14 +2,17 @@ import {Component,View,OnInit} from 'angular2/core';
 import {Router} from "angular2/router";
 
 import {ProductInterface} from '../dataService/product.interface';
-import {DataService} from '../dataService/data.service'
+import {DataService} from '../dataService/data.service';
+import {CartService} from '../dataService/cart.service';
 
 @Component({
-    selector :'home-list'
+    selector :'home-list',
+    providers :[CartService]
 })
 
 @View({
     templateUrl :'/app/views/list-product.partial.html'
+
 })
 
 export class HomeList{
@@ -19,7 +22,8 @@ export class HomeList{
 
     constructor(
         private _router : Router,
-        private _dataService: DataService
+        private _dataService: DataService,
+        private _cartService: CartService
     ){}
 
     ngOnInit(){
@@ -31,7 +35,6 @@ export class HomeList{
             products => {
                 this.products = products;
                 this.isFetching = true;
-                console.log(products)
             }
         )
     }
@@ -39,6 +42,15 @@ export class HomeList{
     gotoDetail(slug:string) {
         console.log(slug);
         this._router.navigate(['ProductsDetail', {productslug:slug}]);
+        return false;
+    }
+
+    getCart(){
+        this._cartService.getCartContent();
+    }
+
+    addtoCart(id:number){
+        this._cartService.addToCart(id);
         return false;
     }
 

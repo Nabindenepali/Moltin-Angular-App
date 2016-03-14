@@ -46,12 +46,16 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                 function Store(_dataService, _router) {
                     this._dataService = _dataService;
                     this._router = _router;
+                    this.isFetching = false;
+                    var cartID = Math.floor(100000 + Math.random() * 900000);
+                    sessionStorage.setItem('cartID', JSON.parse(cartID));
                     this.homeData();
                 }
                 Store.prototype.homeData = function () {
                     var _this = this;
                     this._dataService.getCategories().subscribe(function (categories) {
                         _this.categories = categories;
+                        _this.isFetching = true;
                     });
                     this._dataService.getBrands().subscribe(function (brands) {
                         _this.brands = brands;
@@ -66,12 +70,6 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                     console.log(slug);
                     this._router.navigate(['BrandDetail', { brandname: slug }]);
                     return false;
-                };
-                Store.prototype.showNav = function () {
-                    this.toggleClass();
-                };
-                Store.prototype.toggleClass = function () {
-                    this.addClass = !this.addClass;
                 };
                 Store = __decorate([
                     core_1.Component({

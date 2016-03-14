@@ -53,10 +53,6 @@ export class DataService implements OnInit{
         return this.fetchData('https://api.molt.in/v1/brands');
     }
 
-
-
-
-
     private handleError (error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');

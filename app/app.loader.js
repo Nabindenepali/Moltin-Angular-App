@@ -26,7 +26,7 @@ System.register(['angular2/platform/browser', "angular2/router", 'angular2/http'
             sessionStorage.setItem('access-token', JSON.parse(data).access_token);
             sessionStorage.setItem('expires', JSON.parse(data).expires);
             console.log(sessionStorage);
-            browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS]);
+            browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS, http_1.JSONP_PROVIDERS]);
         }, function (error) {
             console.log(error.message);
         });
@@ -62,7 +62,7 @@ System.register(['angular2/platform/browser', "angular2/router", 'angular2/http'
             else {
                 console.log('Using Available Access Token');
                 //console.log(sessionStorage);
-                browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS]);
+                browser_1.bootstrap(app_index_1.Store, [router_1.ROUTER_PROVIDERS, data_service_1.DataService, http_1.HTTP_PROVIDERS, http_1.JSONP_PROVIDERS]);
             }
         }
     }
