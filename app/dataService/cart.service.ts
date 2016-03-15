@@ -40,10 +40,6 @@ export class CartService{
         return this.sendData('https://api.molt.in/v1/carts/:',id,qty)
     }
 
-    test(){
-        return 'bb';
-    }
-
     private handleError (error: Response) {
         console.error(error);
         return Observable.throw(error.errors || 'Server error');
