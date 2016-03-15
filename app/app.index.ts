@@ -1,4 +1,4 @@
-import {Component,View,OnInit} from 'angular2/core';
+import {Component,View,OnInit,ViewChild} from 'angular2/core';
 import {RouteConfig, ROUTER_PROVIDERS, ROUTER_DIRECTIVES,Router} from "angular2/router";
 import {Control} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
@@ -6,7 +6,8 @@ import {HTTP_PROVIDERS}    from 'angular2/http';
 
 import {DataService} from './dataService/data.service';
 import {CategoryInterface} from './dataService/data.interface';
-import {BrandsInterface} from './dataService/brands.interface'
+import {BrandsInterface} from './dataService/brands.interface';
+import {CartInterface} from './dataService/cart.interface';
 import {HomeList} from './store/home.list';
 import {ProductList} from './store/product.list';
 import {CategoryList} from './store/category.list';
@@ -14,13 +15,16 @@ import {BrandList} from './store/brand.list'
 import {ProductDetail} from './store/productDetail.component';
 import {Search} from './store/search.component';
 
+
+
+
 @Component({
     selector : 'store-app'
 })
 
 @View({
         templateUrl : '/app/views/main.view.html',
-        directives : [ROUTER_DIRECTIVES,Search]
+        directives : [ROUTER_DIRECTIVES,Search,HomeList]
 })
 
 @RouteConfig([
@@ -35,7 +39,10 @@ import {Search} from './store/search.component';
 export class Store implements OnInit{
     categories : CategoryInterface[];
     brands: BrandsInterface[];
+    cart:CartInterface[] = 0 ;
     private isFetching: boolean = false;
+
+    @ViewChild(HomeList) home: HomeList;
     constructor(
         private _dataService : DataService,
         private _router : Router
@@ -44,6 +51,25 @@ export class Store implements OnInit{
         let cartID = Math.floor(100000 + Math.random() * 900000);
         sessionStorage.setItem('cartID' , JSON.parse(cartID));
         this.homeData();
+
+        // This is just a workaround will change with angular 2
+        let subs = null;
+        _router.subscribe(() => {
+            if (subs) {
+                subs.unsubscribe();
+                subs = null;
+            }
+
+            if (this.home) {
+                subs = this.home.emitCart.subscribe(
+                    message => {
+                        this.clik(message);
+                    }
+                );
+            }
+
+        });
+
     }
 
     homeData(){
@@ -71,6 +97,15 @@ export class Store implements OnInit{
         this._router.navigate(['BrandDetail', {brandname:slug}]);
         return false;
     }
+    clik(m:string){
+        this.cart = m;
+    }
+
+    onVoted(agreed: boolean) {
+        console.log('triggered');
+
+    }
+
 
 }
 

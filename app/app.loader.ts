@@ -8,11 +8,11 @@ import {init} from "typings/dist/init";
 
 var currentDate = Math.floor(Date.now()/1000);
 //var currentDate = 1457585941;
-console.log(currentDate);
+console.log(currentDate,parseInt(sessionStorage.expires));
 
 
 
-if(sessionStorage.length == 0 || sessionStorage.expires <= currentDate){
+if(sessionStorage.length == 0 || parseInt(sessionStorage.expires) <= currentDate){
     console.log('Fetching Access Token');
     getAccessToken();
 } else {
@@ -27,6 +27,7 @@ function getAccessToken(){
     var promise = new Promise(function(resolve, reject) {
         var request = new XMLHttpRequest();
         request.open('POST', 'https://api.molt.in/oauth/access_token?');
+
         request.onload = function() {
             if (request.status == 200) {
                 resolve(request.response);

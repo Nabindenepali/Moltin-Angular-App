@@ -44,12 +44,27 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
         execute: function() {
             Store = (function () {
                 function Store(_dataService, _router) {
+                    var _this = this;
                     this._dataService = _dataService;
                     this._router = _router;
+                    this.cart = 0;
                     this.isFetching = false;
                     var cartID = Math.floor(100000 + Math.random() * 900000);
                     sessionStorage.setItem('cartID', JSON.parse(cartID));
                     this.homeData();
+                    // This is just a workaround will change with angular 2
+                    var subs = null;
+                    _router.subscribe(function () {
+                        if (subs) {
+                            subs.unsubscribe();
+                            subs = null;
+                        }
+                        if (_this.home) {
+                            subs = _this.home.emitCart.subscribe(function (message) {
+                                _this.clik(message);
+                            });
+                        }
+                    });
                 }
                 Store.prototype.homeData = function () {
                     var _this = this;
@@ -71,13 +86,23 @@ System.register(['angular2/core', "angular2/router", './dataService/data.service
                     this._router.navigate(['BrandDetail', { brandname: slug }]);
                     return false;
                 };
+                Store.prototype.clik = function (m) {
+                    this.cart = m;
+                };
+                Store.prototype.onVoted = function (agreed) {
+                    console.log('triggered');
+                };
+                __decorate([
+                    core_1.ViewChild(home_list_1.HomeList), 
+                    __metadata('design:type', home_list_1.HomeList)
+                ], Store.prototype, "home", void 0);
                 Store = __decorate([
                     core_1.Component({
                         selector: 'store-app'
                     }),
                     core_1.View({
                         templateUrl: '/app/views/main.view.html',
-                        directives: [router_1.ROUTER_DIRECTIVES, search_component_1.Search]
+                        directives: [router_1.ROUTER_DIRECTIVES, search_component_1.Search, home_list_1.HomeList]
                     }),
                     router_1.RouteConfig([
                         { path: '/', name: 'Home', component: home_list_1.HomeList },

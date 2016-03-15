@@ -1,13 +1,16 @@
-import {Component,View,OnInit} from 'angular2/core';
+import {Component,View,OnInit,Output,EventEmitter} from 'angular2/core';
 import {Router} from "angular2/router";
 
 import {ProductInterface} from '../dataService/product.interface';
 import {DataService} from '../dataService/data.service';
 import {CartService} from '../dataService/cart.service';
+import {CartStatus} from "./cartupdate.component";
 
 @Component({
     selector :'home-list',
     providers :[CartService]
+
+
 })
 
 @View({
@@ -19,11 +22,13 @@ export class HomeList{
     title: string;
     products : ProductInterface[];
     private isFetching: boolean = false;
+    @Output() emitCart = new EventEmitter();
 
     constructor(
         private _router : Router,
         private _dataService: DataService,
         private _cartService: CartService
+
     ){}
 
     ngOnInit(){
@@ -46,11 +51,18 @@ export class HomeList{
     }
 
     getCart(){
-        this._cartService.getCartContent();
+        this._cartService.getCartContent().subscribe(
+            cartContent => {
+                this.emitCart.emit(cartContent.result.total_items);
+            }
+        );
     }
-
     addtoCart(id:number){
-        this._cartService.addToCart(id);
+        this._cartService.addToCart(id).subscribe(
+            cartItem =>{
+                this.getCart();
+            }
+        )
         return false;
     }
 

@@ -1,4 +1,4 @@
-<input type="text" #term (keyup)="search(term.value)" />
+<input type="text" #term (keyup)="search(term.value)" placeholder="aa"/>
 <div class="searchResults">
     <ul>
         <li *ngFor="#item of items | async">

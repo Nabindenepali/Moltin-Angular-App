@@ -7,6 +7,7 @@ import {Http, Response, Headers} from 'angular2/http';
 export class CartService{
     cartID:string = sessionStorage.getItem('cartID');
     token:string = sessionStorage.getItem('access-token');
+
     constructor(private http:Http){}
 
     sendData(url:string,productid:number,productquantity:number){
@@ -17,9 +18,9 @@ export class CartService{
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers.append('Authorization', 'Bearer ' + this.token);
         return this.http.post(carturl,params,{headers : headers})
-            .subscribe(
-                res => console.log(res)
-            )
+            .map(res => JSON.parse(res._body))
+            //.catch(this.handleError())
+
 
     }
 
@@ -29,9 +30,8 @@ export class CartService{
                     "Authorization" : "Bearer " + this.token
                 })
             })
-            .subscribe(
-                cart => console.log(cart)
-            )
+            .map(res => JSON.parse(res._body))
+            //.catch(this.handleError(res))
 
     }
 
@@ -42,8 +42,12 @@ export class CartService{
         return this.sendData('https://api.molt.in/v1/carts/:',id,qty)
     }
 
+    test(){
+        return 'bb';
+    }
+
     private handleError (error: Response) {
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error.errors || 'Server error');
     }
 }

@@ -54,8 +54,8 @@ System.register(['angular2/platform/browser', "angular2/router", 'angular2/http'
         execute: function() {
             currentDate = Math.floor(Date.now() / 1000);
             //var currentDate = 1457585941;
-            console.log(currentDate);
-            if (sessionStorage.length == 0 || sessionStorage.expires <= currentDate) {
+            console.log(currentDate, parseInt(sessionStorage.expires));
+            if (sessionStorage.length == 0 || parseInt(sessionStorage.expires) <= currentDate) {
                 console.log('Fetching Access Token');
                 getAccessToken();
             }
