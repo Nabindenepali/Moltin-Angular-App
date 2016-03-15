@@ -20,8 +20,6 @@ export class CartService{
         return this.http.post(carturl,params,{headers : headers})
             .map(res => JSON.parse(res._body))
             //.catch(this.handleError())
-
-
     }
 
     getCartContent(){

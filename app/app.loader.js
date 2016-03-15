@@ -1,6 +1,4 @@
-System.register(['angular2/platform/browser', "angular2/router", 'angular2/http', './app.index', './dataService/service.details', './dataService/data.service'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/platform/browser', "angular2/router", 'angular2/http', './app.index', './dataService/service.details', './dataService/data.service'], function(exports_1) {
     var browser_1, router_1, http_1, app_index_1, service_details_1, data_service_1;
     var currentDate;
     //GET ACCESS TOKEN
