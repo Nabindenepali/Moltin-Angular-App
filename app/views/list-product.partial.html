@@ -17,8 +17,13 @@
                     <p>
                         <a href="{{product.slug}}" (click)="gotoDetail(product.slug)">{{product.title}}</a>
                             </p>
-                    <a href="#" class="btn btn-default add-to-cart" (click)="addtoCart(product.id)">
-                        <i class="fa fa-shopping-cart" ></i>Add to cart</a>                          </div>
+                    <a href="#" class="btn addToCart" (click)="addtoCart(product,product.id)" [class.btn-success]="!product.active" [class.btn-warning]="product.active">
+                        <i class="fa fa-shopping-cart" ></i>
+                        <span [hidden]="product.active">Add to cart</span>
+                        <span [hidden]="!product.active">Adding to cart</span>
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>

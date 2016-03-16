@@ -24,7 +24,7 @@ import {Search} from './store/search.component';
 
 @View({
         templateUrl : '/app/views/main.view.html',
-        directives : [ROUTER_DIRECTIVES,Search,HomeList]
+        directives : [ROUTER_DIRECTIVES,Search,HomeList,ProductList,CategoryList]
 })
 
 @RouteConfig([
@@ -43,6 +43,10 @@ export class Store implements OnInit{
     private isFetching: boolean = false;
 
     @ViewChild(HomeList) home: HomeList;
+    @ViewChild(ProductList) products: ProductList;
+    @ViewChild(CategoryList) category: CategoryList;
+    @ViewChild(BrandList) brand: BrandList;
+
     constructor(
         private _dataService : DataService,
         private _router : Router
@@ -62,6 +66,27 @@ export class Store implements OnInit{
 
             if (this.home) {
                 subs = this.home.emitCart.subscribe(
+                    message => {
+                        this.clik(message);
+                    }
+                );
+            }
+            if (this.products) {
+                subs = this.products.emitCart.subscribe(
+                    message => {
+                        this.clik(message);
+                    }
+                );
+            }
+            if (this.category) {
+                subs = this.category.emitCart.subscribe(
+                    message => {
+                        this.clik(message);
+                    }
+                );
+            }
+            if (this.brand) {
+                subs = this.brand.emitCart.subscribe(
                     message => {
                         this.clik(message);
                     }

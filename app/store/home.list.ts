@@ -4,7 +4,7 @@ import {Router} from "angular2/router";
 import {ProductInterface} from '../dataService/product.interface';
 import {DataService} from '../dataService/data.service';
 import {CartService} from '../dataService/cart.service';
-import {CartStatus} from "./cartupdate.component";
+
 
 @Component({
     selector :'home-list',
@@ -28,7 +28,6 @@ export class HomeList{
         private _router : Router,
         private _dataService: DataService,
         private _cartService: CartService
-
     ){}
 
     ngOnInit(){
@@ -57,13 +56,22 @@ export class HomeList{
             }
         );
     }
-    addtoCart(id:number){
+    addtoCart(selector:ProductInterface,id:number){
+
+        this.removeClassfromOthers(this.products);
+        selector.active = true;
+
         this._cartService.addToCart(id).subscribe(
             cartItem =>{
                 this.getCart();
+                selector.active = false;
             }
         )
         return false;
+    }
+
+    removeClassfromOthers(selectors){
+        selectors.forEach((selector)=>selector.active = false);
     }
 
 }

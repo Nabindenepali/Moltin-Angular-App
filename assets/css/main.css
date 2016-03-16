@@ -1004,6 +1004,11 @@ h2.title {
   color: #FFFFFF;
 }
 
+.add-to-cart.adding {
+    background: #000;
+
+}
+
 .add-to{
   margin-bottom: 10px;
 }

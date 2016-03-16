@@ -22,6 +22,7 @@ export class CartService{
             //.catch(this.handleError())
     }
 
+
     getCartContent(){
         return this.http.get('https://api.molt.in/v1/carts/:'+ this.cartID,{
                 headers : new Headers({
@@ -39,7 +40,7 @@ export class CartService{
         }
         return this.sendData('https://api.molt.in/v1/carts/:',id,qty)
     }
-
+    //THis needs fixing
     private handleError (error: Response) {
         console.error(error);
         return Observable.throw(error.errors || 'Server error');
