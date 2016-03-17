@@ -30,7 +30,7 @@ export class CartService{
                 })
             })
             .map(res => JSON.parse(res._body))
-            //.catch(this.handleError(res))
+            //.catch(res => console.log(res))
 
     }
 
@@ -42,7 +42,7 @@ export class CartService{
     }
     //THis needs fixing
     private handleError (error: Response) {
-        console.error(error);
-        return Observable.throw(error.errors || 'Server error');
+        console.error(error[0]);
+        //return Observable.throw(error.errors || 'Server error');
     }
 }

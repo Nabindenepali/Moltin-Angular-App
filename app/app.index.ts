@@ -24,7 +24,7 @@ import {Search} from './store/search.component';
 
 @View({
         templateUrl : '/app/views/main.view.html',
-        directives : [ROUTER_DIRECTIVES,Search,HomeList,ProductList,CategoryList]
+        directives : [ROUTER_DIRECTIVES,Search,HomeList,ProductList,CategoryList,ProductDetail]
 })
 
 @RouteConfig([
@@ -46,6 +46,7 @@ export class Store implements OnInit{
     @ViewChild(ProductList) products: ProductList;
     @ViewChild(CategoryList) category: CategoryList;
     @ViewChild(BrandList) brand: BrandList;
+    @ViewChild(ProductDetail) productDet: ProductDetail;
 
     constructor(
         private _dataService : DataService,
@@ -87,6 +88,13 @@ export class Store implements OnInit{
             }
             if (this.brand) {
                 subs = this.brand.emitCart.subscribe(
+                    message => {
+                        this.clik(message);
+                    }
+                );
+            }
+            if (this.productDet) {
+                subs = this.productDet.emitCart.subscribe(
                     message => {
                         this.clik(message);
                     }

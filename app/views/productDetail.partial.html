@@ -15,14 +15,16 @@
             <h2>{{product.title}}</h2>
             <p>Web ID: {{product.id}}</p>
 
-								<span>
-									<span>${{product.price.data.raw.with_tax}}</span>
+								<span class="product-info">
+									<span class="price">${{product.price.data.raw.with_tax}}</span>
 									<label>Quantity:</label>
-									<input type="text" value="1" />
-									<button type="button" class="btn btn-fefault cart">
+									<input type="text" value="1" #qty/>
+                                    <button type="button" class="btn" (click)="addtoCart(product.id,qty.value,product)" [class.btn-success]="!product.active" [class.btn-warning]="product.active">
                                         <i class="fa fa-shopping-cart"></i>
-                                        Add to cart
+                                        <span [hidden]="product.active">Add to cart</span>
+                                        <span [hidden]="!product.active">Adding to cart</span>
                                     </button>
+
 								</span>
             <p><b>Availability:</b> {{product.stock_status.data.value}}</p>
             <p><b>Condition:</b> New</p>

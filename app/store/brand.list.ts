@@ -4,7 +4,6 @@ import {Router,RouteParams} from "angular2/router";
 import {DataService} from '../dataService/data.service';
 import {ProductInterface} from '../dataService/product.interface';
 import {CartService} from '../dataService/cart.service';
-import {CartStatus} from "./cartupdate.component";
 
 
 @Component({
