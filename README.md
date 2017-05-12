@@ -1,28 +1,53 @@
-# Moltin
+# Angular 4 App For Moltin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
+App using Angular4 for Frontend and Moltin as the Backend and API provider.
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Register at https://moltin.com/
+2. Get the public key from the site
+3. Update the <strong>PUBLIC_ID</strong> in app/dataService/service.details.ts with your public ID.
+2. Create a store at https://forge.moltin.com/ after registration
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+### Prerequisities
 
-## Build
+1. Node.js
+2. A Moltin Store account
+3. Public Key from Moltin
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+### Installing
+1. Install Node.js from https://nodejs.org/en/
+2. Run the following commands from you terminal or command prompt from the project folder
+    <pre>
+        <code>npm install</code>
+        <code>npm start</code>
+    </pre>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Built With
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+* Node.js for Typescript compiling and Server
+* Moltin for eCommerce backend and apis
+* Angular2 for frontend
 
-## Further help
+## Contributing
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Node.js Server and TypeScript compiler setup done according to offical Angular 2 Site https://angular.io/
+* Moltin for its ecommerce API http://moltin.com/
+
+
