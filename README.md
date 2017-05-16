@@ -13,8 +13,9 @@ App using Angular4 for Frontend and Moltin as the Backend and API provider.
 ### Prerequisities
 
 1. Node.js
-2. A Moltin Store account
-3. Public Key from Moltin
+2. Angular Cli https://cli.angular.io/
+3. A Moltin Store account
+4. Public Key from Moltin
 
 
 ### Installing
@@ -22,7 +23,7 @@ App using Angular4 for Frontend and Moltin as the Backend and API provider.
 2. Run the following commands from you terminal or command prompt from the project folder
     <pre>
         <code>npm install</code>
-        <code>npm start</code>
+        <code>ng serve</code>
     </pre>
 
 
