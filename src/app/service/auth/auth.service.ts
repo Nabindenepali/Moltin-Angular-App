@@ -1,48 +1,46 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
 import {AppconfigService} from '../../config/appconfig.service';
-import {Observable} from 'rxjs/Rx';
+import 'rxjs/Rx';
 
 
 @Injectable()
 export class AuthService {
     tokenurl = 'https://api.moltin.com/oauth/access_token';
     appKey: string = AppconfigService.PUBLIC_ID;
-    currentTime = Math.floor(Date.now() / 1000);
 
     constructor(private _http: Http) {
     }
 
-    fetchToken(): Observable<Object> {
-        let headers = new Headers();
+    fetchToken(granttype: string, token?: string) {
+        console.log('Fetching Access Token');
+        let headers = new Headers(),
+            rtoken = '';
+        if (token) {
+            rtoken = '&refresh_token=' + token;
+        }
         let creds =
-            'grant_type=implicit'
-            + '&client_id=' + this.appKey;
+            '&grant_type=' + granttype
+            + '&client_id=' + this.appKey
+            + rtoken;
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        return this._http.post(this.tokenurl, creds, {headers: headers});
+        return this._http.post(this.tokenurl, creds, {headers: headers})
     }
 
-    refreshToken(){
-
+    refreshToken() {
+        return this.fetchToken('refresh_token', localStorage.moltintoken);
     }
 
-    checkSession(): Promise<Object> {
-        return new Promise(resolve => {
-            if (localStorage.moltinexpiration < this.currentTime) {
-                this.fetchToken().subscribe((res: Response) => {
-                    AuthService.setSession(res.json());
-                    console.log('Fetching new token');
-                    resolve(true);
-                })
-            } else {
-                console.log('Using old token');
-                resolve(true);
-            }
-        })
-    }
-
-    static setSession(response) {
+    setSession(response): void {
         localStorage.setItem('moltintoken', response.access_token);
         localStorage.setItem('moltinexpiration', response.expires);
     }
+
+    static isTokenActive(): Boolean{
+        let currentTime = Math.floor(Date.now() / 1000);
+        // Check if Access Token is available or valid
+        return localStorage.moltinexpiration < currentTime || !(localStorage.moltintoken);
+    }
+
+
 }
