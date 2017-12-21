@@ -17,11 +17,24 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "moltin",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "assets/css/flexslider.css",
+        "assets/css/style.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/jquery-migrate/dist/jquery-migrate.min.js",
+        "../node_modules/flexslider/jquery.flexslider.js",
+        "assets/js/easyResponsiveTabs.js",
+        "assets/js/jquery.flexisel.js",
+        "assets/js/jquery.wmuSlider.js",
+        "assets/js/minicart.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

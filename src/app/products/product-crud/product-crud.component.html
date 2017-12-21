@@ -1,0 +1,103 @@
+<div class="content" *ngIf="this._globalDataService.isAuthenticated">
+  <div class="container">
+    <div>
+    <div class="row">
+      <form [formGroup]="productForm" (ngSubmit)="addProduct(productForm.value)" class="form-horizontal">
+        <fieldset>
+          <legend>Add new product</legend>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="name">Name</label>
+            <div class="col-md-6">
+              <input formControlName="name" id="name" name="name" type="text" placeholder="Name" class="form-control input-md">
+              <div class="alert" *ngIf="!productForm.controls['name'].valid && productForm.controls['name'].touched">You must enter name between 10 and 100 characters.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="description">Description</label>
+            <div class="col-md-6">
+              <input formControlName="description" id="description" name="description" type="text" placeholder="Description" class="form-control input-md">
+              <div class="alert" *ngIf="!productForm.controls['description'].valid && productForm.controls['description'].touched">You must enter description between 20 and 200 characters.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="slug">Slug</label>
+            <div class="col-md-6">
+              <input formControlName="slug" id="slug" name="slug" type="text" placeholder="Slug" class="form-control input-md">
+              <div class="alert" *ngIf="!productForm.controls['slug'].valid && productForm.controls['slug'].touched">You must enter slug between 5 and 50 characters.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="status">Status</label>
+            <div class="col-md-6">
+              <select formControlName="status" id="status" name="status" class="form-control input-md">
+                <option *ngFor="let status of statuses" [value]="status" [selected]="true">{{status}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="commodity_type">Commodity Type</label>
+            <div class="col-md-6">
+              <select formControlName="commodity_type" id="commodity_type" name="commodity_type" class="form-control input-md">
+                <option *ngFor="let cmtype of cmtypes" [value]="cmtype" [selected]="true">{{cmtype}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="sku">Sku</label>
+            <div class="col-md-6">
+              <input formControlName="sku" id="sku" name="sku" type="text" placeholder="Sku" class="form-control input-md">
+              <div class="alert" *ngIf="!productForm.controls['sku'].valid && productForm.controls['sku'].touched">You must enter sku between 5 and 50 characters.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="manage_stock">Manage Stock</label>
+            <div class="col-md-6">
+              <input formControlName="manage_stock" id="manage_stock" name="manage_stock" type="checkbox" class="input-md">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="stock">Stock</label>
+            <div class="col-md-6">
+              <input formControlName="stock" id="stock" name="stock" type="number" min="0" placeholder="In stock" class="form-control input-md">
+              <div class="alert" *ngIf="!productForm.controls['stock'].valid && productForm.controls['stock'].touched">Status field is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="price">Price</label>
+            <div class="col-md-6">
+              <input formControlName="price" id="price" name="price" type="number" min="0" placeholder="Price" class="form-control input-md">
+              <div class="alert" *ngIf="!productForm.controls['price'].valid && productForm.controls['price'].touched">Price field is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-4">
+              <input (change)="onFileChange($event)" id="image" placeholder="Upload file" type="file" accept=".jpg,.jpeg,.png">
+              <br>
+              <img id="preview" src="" alt="">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-4">
+              <button id="submit" name="submit" class="btn btn-primary" [disabled]="!productForm.valid">Save</button>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>

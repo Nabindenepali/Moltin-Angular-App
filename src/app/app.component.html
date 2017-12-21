@@ -1,5 +1,6 @@
-<h1>
-  <div class="msg" *ngIf="isAuthenticated">Authenticate</div>
-    <button (click)="btnclick()">click me</button>
+<moltin-header></moltin-header>
+<router-outlet></router-outlet>
+<!--<moltin-dashboard *ngIf="this._globalDataService.isAuthenticated"></moltin-dashboard>-->
+<!--<moltin-productlist *ngIf="this._globalDataService.isAuthenticated"></moltin-productlist>-->
+<moltin-footer></moltin-footer>
 
-</h1>
