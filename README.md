@@ -1,6 +1,6 @@
-# Angular 2 App For Moltin
+# Angular 4 App For Moltin
 
-App using Angular2 for Frontend and Moltin as the Backend and API provider.
+App using Angular4 for Frontend and Moltin as the Backend and API provider.
 
 ## Getting Started
 
@@ -13,8 +13,9 @@ App using Angular2 for Frontend and Moltin as the Backend and API provider.
 ### Prerequisities
 
 1. Node.js
-2. A Moltin Store account
-3. Public Key from Moltin
+2. Angular Cli https://cli.angular.io/
+3. A Moltin Store account
+4. Public Key from Moltin
 
 
 ### Installing
@@ -22,7 +23,7 @@ App using Angular2 for Frontend and Moltin as the Backend and API provider.
 2. Run the following commands from you terminal or command prompt from the project folder
     <pre>
         <code>npm install</code>
-        <code>npm start</code>
+        <code>ng serve</code>
     </pre>
 
 
@@ -49,6 +50,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Node.js Server and TypeScript compiler setup done according to offical Angular 2 Site https://angular.io/
 * Moltin for its ecommerce API http://moltin.com/
-
 
 
