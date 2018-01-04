@@ -1,32 +1,22 @@
-import {Component, OnInit,} from '@angular/core';
-import {Response} from '@angular/http';
-
-import {AuthService} from './service/auth/auth.service';
-
+import {Component, OnInit} from '@angular/core';
+import {TokenService} from './shared/service/token/token.service';
+import {GlobalDataService} from './shared/service/globaldata/globaldata.service';
 
 @Component({
-    selector: 'moltin-app',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
-
+  selector: 'moltin-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class Moltin implements OnInit {
-    isAuthenticated: Boolean = false;
 
-    constructor(private _auth: AuthService) {
-    }
+  constructor(private _tokenService: TokenService, private _globalDataService: GlobalDataService) {
+  }
 
-    ngOnInit() {
-        this._auth.fetchToken().subscribe((res: Response) => {
-            AuthService.setSession(res.json());
-            this.isAuthenticated = false;
-        })
+  ngOnInit() {
+    if (localStorage.getItem('user_logged_in') === 'true') {
+      this._globalDataService.isAuthenticated = true;
     }
+  }
 
-    btnclick() {
-        this._auth.checkSession().then((data: Boolean) => {
-            this.isAuthenticated = data;
-        })
-    }
 }
 
